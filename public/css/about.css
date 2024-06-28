@@ -9,34 +9,6 @@
     font-family: 'gilroy';
 }
 
-html,body{
-    /* height: 100%; */
-    /* width: 100%; */
-    /* border-bottom: 2px solid #fff; */
-
-    /* background: rgb(11,28,6);
-background: -moz-linear-gradient(90deg, rgba(11,28,6,1) 0%, rgba(52,131,40,1) 35%, rgba(10,37,3,1) 100%);
-background: -webkit-linear-gradient(90deg, rgba(11,28,6,1) 0%, rgba(52,131,40,1) 35%, rgba(10,37,3,1) 100%);
-background: linear-gradient(90deg, rgba(11,28,6,1) 0%, rgba(52,131,40,1) 35%, rgba(10,37,3,1) 100%);
-filter: progid:DXImageTransform.Microsoft.gradient(startColorstr="#0b1c06",endColorstr="#0a2503",GradientType=1); */
-    /* background-color: #083b18; */
-    /* background-color: #d0d2cf; */
-
-    /* background-color: #092a13; */
-}
-
-/* .title h1{
-    padding-top: 30px;
-margin-top: 42px;
-        font-family: "Poetsen One", sans-serif;
-        font-weight: 100;
-        font-style: normal;  
-    font-size: 1px;
-    color: #ff7e00;
-    text-align: center;
-    font-weight: 600;
-} */
-
 .about-section{
     width: 85%;
     display: flex;
