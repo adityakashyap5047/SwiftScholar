@@ -1,0 +1,90 @@
+<% layout("/layouts/boilerplate") %>
+<style>
+    h3{
+        color: white;
+    }
+    label{
+        color: white;
+    }z
+    #image{
+        background-color: white;
+    }
+</style>
+<body>
+    <h3>Add a doubt</h3>
+    <form action="/doubts/<%= studentId %>/doubt" method="post" enctype="multipart/form-data">
+        <div id="uploadForm">
+            <label for="image">Upload Image</label>
+            <input type="file" id="image" name="doubt[image]" required>
+            <button id="addImageButton" type="button">Add Image Field</button><br>
+        </div>
+        <label for="title">title</label>
+        <input type="text" id="title" name="doubt[title]" placeholder="Enter your title" required><br><br>
+        <label for="class">class</label>
+        <input type="text" id="class" name="doubt[class]" placeholder="Enter your class" required><br><br>
+        <label for="subject">subject</label>
+        <input type="text" id="subject" name="doubt[subject]" placeholder="Enter your subject" required><br><br>
+        <label for="topic">topic</label>
+        <input type="text" id="topic" name="doubt[topic]" placeholder="Enter your topic" required><br><br>
+        <label for="teacher">Select your teacher</label>
+        <select name="doubt[teacher]" id="teacher" required>
+            <option value="none">Select Your Teacher</option>
+            <% for(tchr of allTeachers) {%>
+                <option value="<%= tchr._id %>"><%= tchr.name %>&nbsp;&nbsp;(<%= tchr.subject %>)</option>
+            <% } %>
+        </select><br><br>
+        <input type="hidden" name="doubt[student]" value="<%= studentId %>">
+        <button>Submit</button>
+
+        <script>
+            document.addEventListener('DOMContentLoaded', function() {
+    const addButton = document.getElementById('addImageButton');
+    const uploadForm = document.getElementById('uploadForm');
+    const maxImages = 9; // Maximum number of image upload fields allowed
+  
+    addButton.addEventListener('click', function() {
+      // Check if maximum limit reached
+      if (uploadForm.children.length / 3 >= maxImages) {
+        alert(`You can only upload a maximum of ${maxImages - 2} images.`);
+        return; 
+      }
+  
+      // Create label element
+      const label = document.createElement('label');
+      label.setAttribute('for', `image${uploadForm.children.length}`);
+      label.textContent = 'Upload Image ';
+  
+      // Create input element
+      const input = document.createElement('input');
+      const br = document.createElement('br');
+      input.setAttribute('type', 'file');
+      input.setAttribute('id', `image${uploadForm.children.length}`);
+      br.setAttribute('id', `br${uploadForm.children.length}`)
+      input.setAttribute('name', `doubt[image]`);
+      input.setAttribute('id', `image`);
+      input.setAttribute('class', `mt-3`);
+      input.setAttribute('required', '');
+  
+      // Create remove button
+      const removeButton = document.createElement('button');
+      removeButton.textContent = 'Remove';
+      removeButton.addEventListener('click', function() {
+        uploadForm.removeChild(label);
+        uploadForm.removeChild(input);
+        uploadForm.removeChild(removeButton);
+        uploadForm.removeChild(br);
+      });
+  
+      // Append label, input, remove button, and line break to uploadForm
+      uploadForm.appendChild(label);
+      uploadForm.appendChild(input);
+      uploadForm.appendChild(removeButton);
+      uploadForm.appendChild(br);
+    });
+  });
+  
+        </script>
+    </form>
+</body>
+
+

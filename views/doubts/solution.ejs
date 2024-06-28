@@ -1,0 +1,312 @@
+<% layout("/layouts/boilerplate") %>
+<style>
+  .doubt-container {
+      background-color: white;
+      border-radius: 10px;
+      box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+      padding: 20px;
+      width: 80%;
+      max-width: 800px;
+      margin: 20px auto;
+  }
+  .doubt-header {
+      text-align: center;
+      margin-bottom: 20px;
+  }
+  .doubt-title {
+      font-size: 24px;
+      font-weight: bold;
+      margin-bottom: 10px;
+      text-align: center;
+  }
+  .doubt-images {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px;
+      justify-content: center;
+      margin-bottom: 20px;
+  }
+  .doubt-images img {
+      width: 150px;
+      height: 150px;
+      object-fit: cover;
+      border-radius: 5px;
+      border: 1px solid #ddd;
+      cursor: pointer;
+  }
+  .doubt-details {
+      margin-bottom: 20px;
+  }
+  .detail-item {
+      margin-bottom: 10px;
+  }
+  .detail-label {
+      font-weight: bold;
+  }
+
+  .teacher-details {
+      margin-top: 20px;
+      border-top: 1px solid #ddd;
+      padding-top: 20px;
+  }
+  .teacher-info {
+      font-weight: bold;
+      text-align: center;
+  }
+  .teacher-info div {
+      margin-bottom: 10px;
+  }
+  .teacher-info-detail {
+      padding: 10px;
+      font-weight: normal;
+  }
+  .solution-heading{
+    border-top: 1px solid #ddd;
+    margin-top: 20px;
+    padding-top: 20px;
+  }
+  .teacher-solution-heading {
+      font-size: 17px;
+      font-weight: bold;
+      color: #555;
+      margin-top: 10px;
+      text-decoration: underline;
+  }
+  .solution-images {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px;
+      justify-content: center;
+      margin-top: 10px;
+  }
+  .solution-images img {
+      width: 150px;
+      height: 150px;
+      object-fit: cover;
+      border-radius: 5px;
+      border: 1px solid #ddd;
+      cursor: pointer;
+  }
+  .solution-suggestion {
+      margin-top: 10px;
+      font-weight: bold;
+      text-align: center;
+  }
+  .review-container {
+      margin-top: 20px;
+      border-top: 1px solid #ddd;
+      padding-top: 20px;
+  }
+  .review-details {
+      margin-bottom: 10px;
+  }
+  .review-rating {
+      font-weight: bold;
+      text-align: center;
+      margin-bottom: 10px;
+  }
+
+  @media (max-width: 855px) {
+  .doubt-images img, .solution-images img{
+      width: 275px;
+  }
+}
+
+@media (max-width: 790px) {
+  .doubt-images img, .solution-images img{
+      width: 250px;
+  }
+}
+
+@media (max-width: 715px) {
+  .doubt-images img, .solution-images img{
+      width: 200px;
+  }
+}
+
+@media (max-width: 600px) {
+  .doubt-images img, .solution-images img{
+      width: 90%;
+  }
+}
+
+/* Modal styles */
+.modal {
+      display: none; 
+      position: fixed; 
+      z-index: 1; 
+      left: 0;
+      top: 0;
+      width: 100%;
+      height: 100%;
+      overflow: auto; 
+      background-color: rgb(0,0,0); 
+      background-color: rgba(0,0,0,0.9);
+  }
+  .modal-content {
+      position: relative;
+      margin: 200px auto auto auto;
+      padding: 0;
+      width: 80%;
+      max-width: 700px;
+  }
+  .modal-content .modal-heading-text {
+      color: #134f8b;
+      font-size: 20px;
+      text-align: center;
+      margin: 10px 0;
+  }
+  .modal-content img {
+      width: 100%;
+      height: auto;
+  }
+  .close {
+      position: absolute;
+      top: 100px;
+      right: 25px;
+      color: #fff;
+      font-size: 35px;
+      font-weight: bold;
+      cursor: pointer;
+      z-index: 10;
+  }
+  a{
+      text-decoration: none;
+  }
+  .prev, .next {
+      cursor: pointer;
+      position: absolute;
+      top: 50%;
+      width: auto;
+      padding: 0 16px;
+      color: white;
+      font-weight: bold;
+      font-size: 20px;
+      transition: 0.6s ease;
+      border-radius: 0 3px 3px 0;
+      user-select: none;
+  }
+  .prev {
+      left: 0;
+      border-radius: 3px 0 0 3px;
+  }
+  .next {
+      right: 0;
+      border-radius: 3px 0 0 3px;
+  }
+  .prev:hover, .next:hover {
+      color: rgba(0,0,0,0.8);
+  }
+</style>
+<link rel="stylesheet" href="/css/ratings.css">
+<body>
+    <div class="doubt-container">
+      <div class="doubt-header">
+        <h2>Doubt Details</h2>
+      </div>
+      <div class="doubt-title">
+        <h3>Title: <%= doubt.title %></h3>
+      </div>
+      <div class="doubt-images" id="doubtImages">
+        <% for(imgs of doubt.image) {%>
+            <img src="<%= imgs %>" class="image" alt="doubt image">
+        <% } %>
+    </div>
+    <div class="doubt-details">
+      <div class="detail-item">
+          <span class="detail-label">Class:</span> <span id="doubtClass"><%= doubt.class %></span>
+      </div>
+      <div class="detail-item">
+          <span class="detail-label">Subject:</span> <span id="doubtSubject"><%= doubt.subject %></span>
+      </div>
+      <div class="detail-item">
+          <span class="detail-label">Topic:</span> <span id="doubtTopic"><%= doubt.topic %></span>
+      </div>
+      </div>
+      <% if(teacher && !doubt.solution.length) {%>
+        <h3 class="solution-heading">Solution</h3>
+        <div>*<i>You didn't give any solution yet</i></div>
+        <a href="/doubts/<%= studentId %>/<%= doubtId %>/<%= teacherId %>/solution/teachers"><div class="teacher-solution-heading">Give it now</div></a>
+    <% } %>
+    <div class="solution-container">
+      <% if(teacher && doubt.solution.length) {%>
+      <h3 class="solution-heading">Solution</h3>
+      <div class="solution-images" id="solutionImages">
+          <% for(imgs of doubt.solution[0].image) {%>
+              <img src="<%= imgs %>" class="image" alt="solution image">
+          <% } %>
+      </div>
+      <div class="solution-suggestion" id="solutionSuggestion">
+          Suggestion: <span style="font-weight: normal;"><%= doubt.solution[0].suggestion %></span>
+      </div>
+      <% } %>
+
+      <!-- Review Section -->
+      <% if(doubt.solution.length && doubt.review.length) {%>
+        <div class="review-container">
+        <h3>Review</h3>
+        <div class="review-details">
+            <div class="review-rating" id="reviewRating">
+                <p class="starability-result" data-rating="<%= doubt.review[0].rating %>"></p>
+            </div>
+            <div id="reviewComments">
+                Comments: awesome
+            </div>
+        </div>
+        </div>
+    <% } %>
+    <% if(doubt.solution.length && !doubt.review.length) {%>
+      <div class="review-container">
+        <h3>Review</h3>
+      <div>*<i>You didn't get any review yet</i></div>
+      </div>
+    <% } %>
+  </div>
+    </div>
+
+    <div id="myModal" class="modal">
+      <span class="close" onclick="closeModal()">&times;</span>
+      <div class="modal-content">
+          <div class="modal-heading-text">Viewing images related to the doubt and its solution</div>
+          <img id="modalImage" src="" alt="Modal Image">
+          <a class="prev" onclick="changeImage(-1)">&#10094;</a>
+          <a class="next" onclick="changeImage(1)">&#10095;</a>
+      </div>
+  </div>
+    <script>
+   
+
+  let currentImageIndex = 0;
+        let currentImageArray = [];
+
+        document.querySelectorAll('.doubt-container').forEach(doubt => {
+            const images = doubt.querySelectorAll('.image');
+            images.forEach((img, index) => {
+                img.addEventListener('click', () => {
+                    currentImageArray = Array.from(images);
+                    currentImageIndex = index;
+                    openModal(img.src);
+                });
+            });
+        });
+
+        function openModal(src) {
+            document.getElementById('myModal').style.display = 'block';
+            document.getElementById('modalImage').src = src;
+        }
+
+        function closeModal() {
+            document.getElementById('myModal').style.display = 'none';
+        }
+
+        function changeImage(direction) {
+            currentImageIndex += direction;
+            if (currentImageIndex >= currentImageArray.length) {
+                currentImageIndex = 0;
+            } else if (currentImageIndex < 0) {
+                currentImageIndex = currentImageArray.length - 1;
+            }
+            document.getElementById('modalImage').src = currentImageArray[currentImageIndex].src;
+        }
+    </script>
+</body>

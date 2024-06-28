@@ -1,0 +1,338 @@
+<% layout("/layouts/boilerplate") %>
+<style>
+    body {
+        font-family: Arial, sans-serif;
+    }
+    body > .container {
+        text-align: center;
+    }
+
+    h2 {
+        margin-top: 20px;
+        color: white;
+    }
+
+    label {
+        color: white;
+    }
+
+    .radio-group {
+        margin-bottom: 15px;
+    }
+    .radio-group label {
+        margin-right: 10px;
+    }
+    .field-group {
+        margin-bottom: 15px;
+    }
+    .submit-btn {
+        display: inline-block;
+        padding: 10px 20px;
+        border: none;
+        background-color: orangered;
+        color: white;
+        cursor: pointer;
+        border-radius: 5px;
+        margin-bottom: 20px;
+    }
+    .submit-btn:hover {
+        background-color: #a8f885e2;
+    }
+    .hidden {
+        display: none;
+    }
+
+    /* password with eye icon */
+    .password-content {
+  font-family: Arial, sans-serif;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.password-container {
+  position: relative;
+  display: flex;
+  align-items: center;
+}
+
+#password {
+  padding: 10px;
+  font-size: 16px;
+}
+
+#passkey {
+    padding: 10px;
+    font-size: 16px;
+}
+
+#securityCode {
+    padding: 10px;
+    font-size: 16px;
+}
+
+#togglePassword {
+  background: none;
+  border: none;
+  position: absolute;
+  right: 10px;
+  cursor: pointer;
+}
+
+#togglePassword i {
+  font-size: 18px;
+}
+
+#togglePasskey {
+  background: none;
+  border: none;
+  position: absolute;
+  right: 10px;
+  cursor: pointer;
+}
+
+#togglePasskey i {
+  font-size: 18px;
+}
+
+#toggleSecurityCode {
+  background: none;
+  border: none;
+  position: absolute;
+  right: 10px;
+  cursor: pointer;
+}
+
+#toggleSecurityCode i {
+  font-size: 18px;
+}
+
+
+</style>
+<body>
+    <div class="container">
+        <h2>Sign up</h2>
+        <form id="signUpForm" method="post" action="/study/auth/signup" enctype="multipart/form-data">
+            <div class="radio-group">
+                <input type="radio" id="student" name="role" value="student" required>
+                <label for="student">Student</label>
+                <input type="radio" id="teacher" name="role" value="teacher" required>
+                <label for="teacher">Teacher</label>
+                <input type="radio" id="admin" name="role" value="admin" required>
+                <label for="admin">Admin</label>
+            </div>
+            
+            <!-- Common Fields -->
+            <div class="field-group">
+                <label for="name">Name:</label><br>
+                <input type="text" id="name" name="student[name]" required>
+            </div>
+            <div class="field-group">
+                <label for="profileImage">Upload your Profile Picture:</label><br>
+                <input type="file" id="profileImage" name="student[profileImage]" style="background: white;" required>
+            </div>
+            <div class="field-group">
+                <label for="email">Email ID:</label><br>
+                <input type="email" id="email" name="student[emailId]" required>
+            </div>
+            <div class="field-group">
+                <label for="contact">Contact Number:</label><br>
+                <input type="text" id="contact" name="student[contactNo]" required>
+            </div>
+            <div class="field-group">
+                <label for="username">Username:</label><br>
+                <input type="text" id="username" name="student[username]" required>
+            </div>
+                <input type="hidden" id="type" name="type" value="Student">
+            </div>
+
+            <!-- Student-Specific Fields -->
+            <div class="field-group hidden" id="studentFields">
+                <div>
+                    <label for="class">Class:</label><br>
+                    <input type="text" id="class" name="student[class]">
+                </div>
+                <div>
+                    <label for="school">School:</label><br>
+                    <input type="text" id="school" name="student[school]">
+                </div>
+            </div>
+
+            <!-- Teacher-Specific Fields -->
+            <div class="field-group hidden" id="teacherFields">
+                <div>
+                    <label for="subject">Subject:</label><br>
+                    <input type="text" id="subject" name="teacher[subject]">
+                </div><br>
+                <div>
+                    <label for="description">Description:</label><br>
+                    <textarea id="description" name="teacher[description]"></textarea>
+                </div>
+            </div>
+
+            <!-- Admin-Specific Fields -->
+            <div class="field-group hidden" id="adminFields">
+                <div>
+                    <label for="securityCode">Security Code</label><br>
+                    <div class="password-content">
+                        <div class="password-container">
+                          <input type="password" name="admin[securityCode]" id="securityCode" placeholder="Enter security code" required>
+                          <button id="toggleSecurityCode" type="button">
+                            <i id="eyeIconSecurityCode" class="fa fa-eye"></i>
+                          </button>
+                        </div>
+                    </div><br>
+                </div>
+            </div>
+
+            <!-- Teacher and Admin Specific Fields -->
+            <div class="field-group hidden" id="commonFields">
+                <div>
+                    <label for="passkey">Passkey:</label><br>
+                    <div class="password-content">
+                        <div class="password-container">
+                          <input type="password" name="passkey" id="passkey" placeholder="Enter your passkey" required>
+                          <button id="togglePasskey" type="button">
+                            <i id="eyeIconPasskey" class="fa fa-eye"></i>
+                          </button>
+                        </div>
+                    </div><br>
+                </div>
+            </div>
+
+            <div class="field-group">
+                <label for="password">Password:</label><br>
+                <div class="password-content">
+                    <div class="password-container">
+                      <input type="password" id="password" name="password" placeholder="Enter your password" required>
+                      <button id="togglePassword" type="button">
+                        <i id="eyeIconPassword" class="fa fa-eye"></i>
+                      </button>
+                    </div>
+                </div><br>
+            </div>
+            <button type="submit" class="submit-btn">Sign up</button>
+        </form>
+    </div>
+
+    <script>
+        document.querySelectorAll('input[name="role"]').forEach(roleInput => {
+            roleInput.addEventListener('change', function() {
+                const studentFields = document.getElementById('studentFields');
+                const teacherFields = document.getElementById('teacherFields');
+                const adminFields = document.getElementById('adminFields');
+                const commonFields = document.getElementById('commonFields');
+
+                if (this.value === 'student') {
+                    studentFields.classList.remove('hidden');
+                    teacherFields.classList.add('hidden');
+                    adminFields.classList.add("hidden");
+                    commonFields.classList.add("hidden");
+                    document.getElementById('name').value = "";
+                    document.getElementById('profileImage').value = "";
+                    document.getElementById('email').value = "";
+                    document.getElementById('contact').value = "";
+                    document.getElementById('username').value = "";
+                    document.getElementById('class').value = "";
+                    document.getElementById('school').value = "";
+                    document.getElementById('password').value = "";
+                    document.getElementById('class').required = true;
+                    document.getElementById('school').required = true;
+                    document.getElementById('subject').required = false;
+                    document.getElementById('description').required = false;
+                    document.getElementById('passkey').required = false;
+                    document.getElementById('securityCode').required = false;
+                    document.getElementById('name').name = "student[name]";
+                    document.getElementById('profileImage').name = "student[profileImage]";
+                    document.getElementById('email').name = "student[emailId]";
+                    document.getElementById('contact').name = "student[contactNo]";
+                    document.getElementById('username').name = "student[username]";
+                    document.getElementById('type').value = "Student";
+                } else if (this.value === 'teacher') {
+                    teacherFields.classList.remove('hidden');
+                    studentFields.classList.add('hidden');
+                    adminFields.classList.add("hidden");
+                    commonFields.classList.remove("hidden");
+                    document.getElementById('name').value = "";
+                    document.getElementById('email').value = "";
+                    document.getElementById('profileImage').value = "";
+                    document.getElementById('contact').value = "";
+                    document.getElementById('username').value = "";
+                    document.getElementById('subject').value = "";
+                    document.getElementById('description').value = "";
+                    document.getElementById('passkey').value = "";
+                    document.getElementById('password').value = "";
+                    document.getElementById('class').required = false;
+                    document.getElementById('profileImage').required = false;
+                    document.getElementById('school').required = false;
+                    document.getElementById('subject').required = true;
+                    document.getElementById('description').required = true;
+                    document.getElementById('passkey').required = true;
+                    document.getElementById('securityCode').required = false;
+                    document.getElementById('name').name = "teacher[name]";
+                    document.getElementById('email').name = "teacher[emailId]";
+                    document.getElementById('profileImage').name = "teacher[profileImage]";
+                    document.getElementById('contact').name = "teacher[contactNo]";
+                    document.getElementById('username').name = "teacher[username]";
+                    document.getElementById('passkey').name = "passkey";
+                    document.getElementById('type').value = "Teacher";
+                } else if (this.value === 'admin') {
+                    adminFields.classList.remove("hidden");
+                    studentFields.classList.add('hidden');
+                    teacherFields.classList.add('hidden');
+                    commonFields.classList.remove("hidden");
+                    document.getElementById('name').value = "";
+                    document.getElementById('email').value = "";
+                    document.getElementById('profileImage').value = "";
+                    document.getElementById('contact').value = "";
+                    document.getElementById('username').value = "";
+                    document.getElementById('password').value = "";
+                    document.getElementById('passkey').value = "";                    
+                    document.getElementById('securityCode').value = "";    
+                    document.getElementById('class').required = false;
+                    document.getElementById('profileImage').required = false;
+                    document.getElementById('school').required = false;
+                    document.getElementById('subject').required = false;
+                    document.getElementById('description').required = false;
+                    document.getElementById('passkey').required = true;
+                    document.getElementById('securityCode').required = true; 
+                    document.getElementById('name').name = "admin[name]";
+                    document.getElementById('email').name = "admin[emailId]";
+                    document.getElementById('profileImage').name = "admin[profileImage]";
+                    document.getElementById('contact').name = "admin[contactNo]";
+                    document.getElementById('username').name = "admin[username]";
+                    document.getElementById('passkey').name = "admin[passkey]";
+                    document.getElementById('type').value = "Admin";
+                } 
+            });
+        });
+
+        //password with eye icon
+        document.getElementById('togglePassword').addEventListener('click', function () {
+            const passwordField = document.getElementById('password');
+            const eyeIcon = document.getElementById('eyeIconPassword');
+            const type = passwordField.getAttribute('type') === 'password' ? 'text' : 'password';
+            passwordField.setAttribute('type', type);
+            eyeIcon.classList.toggle('fa-eye');
+            eyeIcon.classList.toggle('fa-eye-slash');
+        });
+
+        document.getElementById('togglePasskey').addEventListener('click', function () {
+            const passkeyField = document.getElementById('passkey');
+            const eyeIcon = document.getElementById('eyeIconPasskey');
+            const type = passkeyField.getAttribute('type') === 'password' ? 'text' : 'password';
+            passkeyField.setAttribute('type', type);
+            eyeIcon.classList.toggle('fa-eye');
+            eyeIcon.classList.toggle('fa-eye-slash');   
+        });
+
+        document.getElementById('toggleSecurityCode').addEventListener('click', function () {
+            const securityCodeField = document.getElementById('securityCode');
+            const eyeIcon = document.getElementById('eyeIconSecurityCode');
+            const type = securityCodeField.getAttribute('type') === 'password' ? 'text' : 'password';
+            securityCodeField.setAttribute('type', type);
+            eyeIcon.classList.toggle('fa-eye');
+            eyeIcon.classList.toggle('fa-eye-slash');   
+        });
+    </script>
+</body>

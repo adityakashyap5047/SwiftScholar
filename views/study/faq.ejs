@@ -1,0 +1,123 @@
+<div class="help-section">
+  <div id="helpadd" class="help">
+    <h1>Frequently Asked Questions</h1>
+
+    <div class="faq">
+      <button class="accordion">
+        What is Study Lite?
+        <i class="fa-solid fa-chevron-down"></i>
+      </button>
+      <div class="pannel">
+        <p>
+          Hey I am StudyLite, I provide proper guidance to students. I check practice Ans from students and evaluate
+          all the mistakes and provide them a proper and better solutions.
+          Tips and tricks for much more betterment and
+          1:1 mentorship for achieving their target. Creates lots of employment for teachers and common people.
+        </p>
+      </div>
+    </div>
+    <div class="faq">
+      <button class="accordion">
+        How to Submit or Upload practice paper ?
+        <i class="fa-solid fa-chevron-down"></i>
+      </button>
+      <div class="pannel">
+        <p>
+          After visiting to (Studylite.co.in) click on the Check Ans., then you will simply redirect to our official
+          WhatsApp number then mention your simple detail asked there like: -
+        <ul>
+          <li>• Your name</li>
+          <li>• Class</li>
+          <li>• Subject of which you are submitting practice paper</li>
+        </ul>
+        <br>
+        After writing all this detail send the image or Pdf. of practice paper in that number only and wait at least
+        10 – 20 minutes to get your checked answer paper.
+        </p>
+      </div>
+    </div>
+
+    <div class="faq">
+      <button class="accordion">
+        Who you can get result?
+        <i class="fa-solid fa-chevron-down"></i>
+      </button>
+      <div class="pannel">
+        <p>
+          After submitting wait for 10 to 20 minute and
+          you will get result from same whatsapp number again.
+        </p>
+      </div>
+    </div>
+
+    <div class="faq">
+      <button class="accordion">
+        On clicking about
+        <i class="fa-solid fa-chevron-down"></i>
+      </button>
+      <div class="pannel">
+        <p>
+          After clicking in about you can read about what is website is, how is it useful.
+
+        </p>
+      </div>
+    </div>
+
+    <div class="faq">
+      <button class="accordion">
+        Music
+        <i class="fa-solid fa-chevron-down"></i>
+      </button>
+      <div class="pannel">
+        <p>
+          Here you can listen motivational songs.
+        </p>
+      </div>
+    </div>
+
+    <div class="faq">
+      <button class="accordion">
+        Story
+        <i class="fa-solid fa-chevron-down"></i>
+      </button>
+      <div class="pannel">
+        <p>
+          Here you can watch real life stories of teachers and student.
+        </p>
+      </div>
+    </div>
+
+    <div class="faq">
+      <button class="accordion">
+        Book store
+        <i class="fa-solid fa-chevron-down"></i>
+      </button>
+      <div class="pannel">
+        <p>
+          Here you can buy or sell old books.
+        </p>
+      </div>
+    </div>
+  </div>
+
+</div>
+
+<script>
+  var acc = document.getElementsByClassName("accordion");
+  var i;
+
+  for (i = 0; i < acc.length; i++) {
+    acc[i].addEventListener("click", function () {
+      this.classList.toggle("active");
+      this.parentElement.classList.toggle("active");
+
+      var pannel = this.nextElementSibling;
+
+      if (pannel.style.display === "block") {
+        pannel.style.display = "none";
+      } else {
+        pannel.style.display = "block";
+      }
+    });
+  }
+</script>

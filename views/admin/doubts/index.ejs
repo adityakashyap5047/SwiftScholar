@@ -1,0 +1,25 @@
+<% layout("/layouts/boilerplate") %>
+<style>
+
+    h1{
+        color: white;
+    }
+    p {
+        color: white;
+    }
+</style>
+<body>
+    <h1>All Doubts</h1>
+    <% for(doubt of allDoubts) {%>
+        <form action="/admin/doubts/<%= doubt._id %>">
+            <div>
+                <hr>
+                <p>image: <%= doubt.image1 %></p>
+                <p>class: <%= doubt.class %></p>
+                <p>subject: <%= doubt.subject %></p>
+                <p>topic: <%= doubt.topic %></p>
+                <button>view it</button>
+            </div>
+        </form>
+    <% } %>
+</body>

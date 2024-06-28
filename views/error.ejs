@@ -1,0 +1,21 @@
+<% layout("layouts/boilerplate") %>
+<style>
+    h4{
+        color: white;
+    }
+    p{
+        color: white;
+    }
+</style>
+<body>
+    <div class="alert alert-danger alert-dismissible fade show col-lg-6 offset-lg-3 col-sm-4" role="alert">
+        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="close"></button>
+        <%= message %>
+    </div>
+
+    <script>
+        document.querySelector('.btn-close').addEventListener('click', function(){
+            window.history.back();
+        });
+    </script>
+</body>

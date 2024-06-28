@@ -1,0 +1,69 @@
+<% layout("/layouts/boilerplate") %>
+<style>
+    h3{
+        color: white;
+    }
+    li{
+        color: white;
+    }
+    h4{
+        color: white;
+    }
+    p{
+        color: white;
+    }
+    a{
+        color: white;
+    }
+</style>
+<body>
+    <h3>Student Details :</h3>
+    <ul>
+        <li>name: <%= student.name %></li>
+        <li>username: <%= student.username %></li>
+        <li>class: <%= student.class %></li>
+        <li>contact number: <%= student.contactNo %></li>
+        <li>email id: <%= student.emailId %></li>
+    </ul>
+    <% if(studentDoubts.doubts.length) {%>
+        <hr>
+        <h4>Your doubts</h4>
+        <hr>
+    <% } %>
+    <% for(dbt of studentDoubts.doubts) {%>
+        <% if(dbt) {%>
+            <p>*********Teachers Details************</p>
+            <% if(dbt.teacher) {%>
+                <p>name: <a href="/admin/teachers/<%= dbt.teacher._id %>"><%= dbt.teacher.name %></a></p>
+                <p>username: <%= dbt.teacher.username %></p>
+                <p>subject: <%= dbt.teacher.subject %></p>
+                <p>contactNo: <%= dbt.teacher.contactNo %></p>
+                <p>emailId: <%= dbt.teacher.emailId %></p>
+            <% } %>
+            <% if(!dbt.teacher) {%>
+                <p><i>Teacher doesn't exist</i></p>
+            <% } %>
+            <p>*********Doubts Details************</p>
+            <p>image: <a href="/admin/doubts/<%= dbt.doubt._id %>"><%= dbt.doubt.image1 %></a></p>
+            <p>class: <%= dbt.doubt.class %></p>
+            <p>subject: <%= dbt.doubt.subject %></p>
+            <p>topic: <%= dbt.doubt.topic %></p>
+        <% } %>
+        <% if(dbt.solution.length) {%>
+            <h4>Your solution</h4>
+            <p>image: <%= dbt.solution[0].image1 %></p>
+            <p>suggestion: <%= dbt.solution[0].suggestion %></p>
+        <% } %>
+        <% if(dbt.review.length) {%>
+            <h4>You gave review</h4>
+            <p>rating: <%= dbt.review[0].rating %></p>
+            <p>comment: <%= dbt.review[0].comments %></p>
+        <% } %>
+        <hr>
+    <% } %>
+    <br>
+    <form method="post" action="/admin/students/<%= student._id %>/delete?_method=DELETE">
+        <button>Delete this profile</button>
+    </form>
+    <br>
+</body>

@@ -1,0 +1,69 @@
+<% layout("/layouts/boilerplate") %>
+<style>
+    h3 {
+        color: white;
+    }
+    li {
+        color: white;
+    }
+    p{
+        color: white;
+    }
+    h4{
+        color: white;
+    }
+</style>
+<body>
+    <h3>Doubts Details :</h3>
+    <ul>
+        <li>image: <%= doubt.image1 %></li>
+        <li>class: <%= doubt.class %></li>
+        <li>subject: <%= doubt.subject %></li>
+        <li>topic: <%= doubt.topic %></li>
+    </ul>
+    <% if(doubt.student) {%>
+        <hr>
+        <p>*********Student Details************</p>
+        <hr>
+        <p>name: <a href="/admin/students/<%= doubt.student._id %>"><%= doubt.student.name %></a></p>
+        <p>username: <%= doubt.student.username %></p>
+        <p>class: <%= doubt.student.class %></p>
+        <p>contactNo: <%= doubt.student.contactNo  %></p>
+        <p>emailId: <%= doubt.student.emailId  %></p>
+        <hr>
+        <p>*********Teacher Details************</p>
+    <% } %>
+    <% if(!doubt.student) {%>
+        <hr>
+        <p>*********Student Details************</p>
+        <hr>
+        <p><i>Student doesn't exist</i></p>
+        <hr>
+        <p>*********Teacher Details************</p>
+    <% } %>
+    <% if(doubt.teacher) {%>
+        <hr>
+        <p>name: <a href="/admin/teachers/<%= doubt.teacher._id %>"><%= doubt.teacher.name %></a></p>
+        <p>username: <%= doubt.teacher.username %></p>
+        <p>subject: <%= doubt.teacher.subject %></p>
+        <p>description: <%= doubt.teacher.description %></p>
+        <p>contactNo: <%= doubt.teacher.contactNo  %></p>
+        <p>emailId: <%= doubt.teacher.emailId  %></p>
+    <% } %>
+    <% if(!doubt.teacher) {%>
+        <hr>
+        <p><i>Teacher doesn't exist</i></p>
+    <% } %>
+    <% if(doubt.solution.length) {%>
+        <hr>
+        <h4>Solution</h4>
+        <p>image: <%= doubt.solution[0].image1 %></p>
+        <p>suggestion: <%= doubt.solution[0].suggestion %></p>
+    <% } %>
+    <% if(doubt.review.length) {%>
+        <hr>
+        <h4>Review</h4>
+        <p>rating: <%= doubt.review[0].rating %></p>
+        <p>comments: <%= doubt.review[0].comments %></p>
+    <% } %>
+</body>

@@ -1,0 +1,72 @@
+<% layout("/layouts/boilerplate") %>
+<style>
+    h3{
+        color: white;
+    }
+    li{
+        color: white;
+    }
+    h4{
+        color: white;
+    }
+    p{
+        color: white;
+    }
+    a{
+        color: white;
+    }
+</style>
+<body>
+    <h3>Teacher Details :</h3>
+    <ul>
+        <li>name: <%= teacher.name %></li>
+        <li>subject: <%= teacher.subject %></li>
+        <li>description: <%= teacher.description %></li>
+        <li>contactNo: <%= teacher.contactNo %></li>
+        <li>emailId: <%= teacher.emailId %></li>
+    </ul>
+    <% if(teacher.doubtAssigned.length) {%>
+        <hr>
+        <h4>Doubts Assigned to you</h4>
+        <hr>
+        <% for(doubts of teacherDoubtAssignedDoubt.doubtAssigned) {%>
+            <% let isStudentExist = false; %>
+            <% for(student of allStudents) {%>
+                <% if(String(student._id) === String(doubts.student._id)) {%>
+                    <% isStudentExist = true %>
+                    <p>*********Student Details************</p>
+                    <p>name: <a href="/admin/students/<%= student._id %>"><%= student.name %></a></p>
+                    <p>username: <%= student.username %></p>
+                    <p>contactNo: <%= student.contactNo %></p>
+                    <p>emaiId: <%= student.emailId %></p>
+                    <p>*********Doubt Details************</p>
+                <% } %>
+            <% } %>
+            <% if(!isStudentExist) {%>
+                <p>*********Student Details************</p>
+                <p><i>*Student doesn't exist</i></p>
+                <p>*********Doubt Details************</p>
+            <% } %>
+            <p>image: <a href="/admin/doubts/<%= doubts.doubt._id %>"><%= doubts.doubt.image1 %></a> </p>
+            <p>class: <%= doubts.doubt.class %></p>
+            <p>subject: <%= doubts.doubt.subject %></p>
+            <p>topic: <%= doubts.doubt.topic %></p>
+            <% if(doubts.solution.length) {%>
+                <h4>Your Suggestion</h4>
+                <p>image: <%= doubts.solution[0].image1 %></p>
+                <p>suggestion: <%= doubts.solution[0].suggestion %></p>
+            <% } %>
+            <% if(doubts.review.length) {%>
+                <h4>You got the review</h4>
+                <p>rating: <%= doubts.review[0].rating %></p>
+                <p>comment: <%= doubts.review[0].comments %></p>
+            <% } %>
+            <hr>
+        <% } %>
+    <% } %>
+    <br>
+    <form method="post" action="/admin/teachers/<%= teacher._id %>/delete?_method=DELETE">
+        <button>Delete this profile</button>
+    </form>
+    <br>
+</body>

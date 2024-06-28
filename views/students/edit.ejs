@@ -1,0 +1,26 @@
+<% layout("/layouts/boilerplate") %>
+<style>
+    h2{
+        color: white;
+    }
+    label{
+        color: white;
+    }    
+</style>
+<body>
+    <h2>Edit your profile</h2>
+    <form method="post" action="/students/<%= student._id %>?_method=PUT">
+        <label for="name">name</label><br>
+        <input type="text" id="name" name="student[name]" value="<%= student.name %>" required><br><br>
+        <label for="class">class</label><br>
+        <input type="text" id="class" name="student[class]" value="<%= student.class %>" required><br><br>
+        <label for="contactNo">contact number</label><br>
+        <input type="text" id="contactNo" name="student[contactNo]" value="<%= student.contactNo %>" required><br><br>
+        <label for="emailId">email id</label><br>
+        <input type="text" id="emailId" name="student[emailId]" value="<%= student.emailId %>" required><br><br>
+        <input type="hidden" name="student[username]" value="<%= student.username %>">
+        <input type="hidden" name="type" value="Student">
+        <input type="hidden" name="password" value="none">
+        <button>Submit</button>
+    </form>
+</body>

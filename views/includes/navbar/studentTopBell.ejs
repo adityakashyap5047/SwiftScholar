@@ -1,0 +1,25 @@
+<% if(currUser && currUser.type === "Student") {%>
+    <% let noti = false %>
+    <% let count = 0 %>
+    <% if(studentDoubt.doubts.length) {%>
+      <% for(dbt of studentDoubt.doubts) {%>
+        <% if(dbt.solution.length) {%>
+          <% if(!dbt.review.length) {%>
+            <% noti = true %>
+            <% count ++ %>
+          <% } %>
+        <% } %>
+      <% } %>
+    <% } %>
+    <% if(noti) {%>
+      <button type="button" class="btn position-relative top-solid-bell" style="background: white; height: 50px; width: 50px; border-radius: 50%;">
+        <i class="fa-solid fa-bell top-solid-bell"></i>
+        <span class="position-absolute top-1 start-99 translate-middle" style="color: #ff4500;">
+          <%= count %>
+        </span>
+      </button>
+    <% } %>
+    <% if(!noti) {%>
+      <i class="fa-regular fa-bell top-regular-bell"></i>
+    <% } %>
+<% } %>

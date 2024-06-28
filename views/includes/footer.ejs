@@ -1,0 +1,149 @@
+<style>
+    body{
+        line-height: 1.5;
+        font-family: 'Poppins', sans-serif;
+        display: flex;
+        flex-direction: column;
+        min-height: 100vh;
+    }
+
+    .container{
+        flex: 1;
+    }
+
+    footer {
+        color: white;
+        background-color: rgb(11,28,6);
+        border-top: 1px solid white;
+    }
+
+    .footer-upper {
+        display: flex;
+        justify-content: space-between;
+        flex-wrap: wrap;
+        padding-top: 15px;
+        flex: 1;
+    }
+    
+
+    .footer-link-support {
+        display: flex;
+        flex-direction: row;
+        flex: 2;
+        justify-content: space-between;
+    }
+
+    .footer-link-support>div {
+        flex: 1;
+        margin: 0 10px;
+    }
+
+    .footer-link {
+        text-align: center;
+    }
+
+    .footer-support {
+        text-align: center;
+    }
+
+
+    .footer-follow {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        flex: 1;
+    }
+
+    
+    h4 {
+        color: #ff4500;
+    }
+
+    p{
+        font-weight: 100;
+        color: #808080;
+    }
+
+    p:hover{
+        font-weight: 400;
+        color: #fff;
+    }
+
+    .social-link a {
+        display: inline-block;
+        height: 40px;
+        width: 40px;
+        background-color: rgba(255,255,255,0.2);
+        margin:0 10px 10px 0;
+        text-align: center;     
+        line-height: 40px;
+        border-radius: 50%;
+        color: #ffffff;
+        transition: all 0.5s ease;
+    }
+
+    .social-link a:hover {
+        color: #24262b;
+        background-color: #ffffff;
+    }
+
+    .copy-right{
+        text-align: center;
+        padding-top: 30px;
+        border-top: 1px solid white;
+        background-color: rgba(5, 6, 5, 0.884);
+        height: 80px;
+    }
+
+    /* Responsive styling for smaller screens */
+    @media (max-width: 768px) {
+        .footer-upper {
+            flex-direction: column;
+            align-items: center;
+        }
+
+        .footer-link-support {
+            flex-direction: row;
+            justify-content: space-around;
+            width: 100%;
+        }
+
+        .footer-follow {
+            margin-top: 20px;
+            width: 100%;
+        }
+    }
+</style>
+
+<body>
+    <footer>
+        <div class="footer-upper">
+            <div class="footer-link-support">
+                <div class="footer-link">
+                    <h4>Link</h4>
+                    <p>Home</p>
+                    <p>About Us</p>
+                    <p>Music</p>
+                    <p>Stories</p>
+                </div>
+                <div class="footer-support">
+                    <h4>Support</h4>
+                    <p>Contact</p>
+                    <p>Help & FAQ</p>
+                    <p>Terms & Conditions</p>
+                    <p>Privacy policy</p>
+                </div>
+            </div>
+            <div class="footer-follow">
+                <h4>Follow us</h4>
+                <div class="social-link">
+                    <a href="#"><i class="fab fa-facebook-f"></i></a>
+                    <a href="#"><i class="fab fa-twitter"></i></a>
+                    <a href="#"><i class="fab fa-instagram"></i></a>
+                    <a href="#"><i class="fab fa-linkedin-in"></i></a>
+                </div>
+            </div>
+        </div>
+        <div class="copy-right">© 2024 Study Lite | All rights reserved.</div>
+    </footer>
+</body>

@@ -1,0 +1,12 @@
+body{
+    background-color: #083b18;
+}
+
+.password{
+    display: flex;
+    height: 20px;
+}
+
+#togglePassword{
+    cursor: pointer;
+}

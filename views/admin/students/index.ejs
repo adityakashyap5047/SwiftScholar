@@ -1,0 +1,24 @@
+<% layout("/layouts/boilerplate") %>
+<style>
+    h1{
+        color: white;
+    }
+    p{
+        color: white;
+    }
+</style>
+<link rel="stylesheet" href="/css/admin/students/index.css">
+<body>
+    <h1>All Students</h1>
+    <% for(student of allStudents) {%>
+        <form action="/admin/students/<%= student._id %>">
+            <div>
+                <p>name: <%= student.name %></p>
+                <p>username: <%= student.username %></p>
+                <p>class: <%= student.class %></p>
+                <button>view profile</button>
+                <hr>
+            </div>
+        </form>
+    <% } %>
+</body>

@@ -1,0 +1,204 @@
+<% layout("/layouts/boilerplate") %>
+<style>
+    body {
+        font-family: Arial, sans-serif;
+    }
+    body > .container {
+        text-align: center;
+    }
+
+    h1 {
+        margin-top: 20px;
+        color: white;
+    }
+
+    label {
+        color: white;
+    }
+
+    .radio-group {
+        margin-bottom: 15px;
+    }
+    .radio-group label {
+        margin-right: 10px;
+    }
+    .submit-btn {
+        display: inline-block;
+        padding: 10px 20px;
+        border: none;
+        background-color: orangered;
+        color: white;
+        cursor: pointer;
+        border-radius: 5px;
+        margin-bottom: 20px;
+    }
+    .submit-btn:hover {
+        background-color: #a8f885e2;
+    } 
+    .hidden {
+        display: none;
+    }
+
+
+    /* password with eye icon */
+    .password-content {
+  font-family: Arial, sans-serif;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.password-container {
+  position: relative;
+  display: flex;
+  align-items: center;
+}
+
+#password {
+  padding: 10px;
+  font-size: 16px;
+}
+
+#passkey {
+    padding: 10px;
+    font-size: 16px;
+}
+
+#securityCode {
+    padding: 10px;
+    font-size: 16px;
+}
+
+#togglePassword {
+  background: none;
+  border: none;
+  position: absolute;
+  right: 10px;
+  cursor: pointer;
+}
+
+#togglePassword i {
+  font-size: 18px;
+}
+
+#togglePasskey {
+  background: none;
+  border: none;
+  position: absolute;
+  right: 10px;
+  cursor: pointer;
+}
+
+#togglePasskey i {
+  font-size: 18px;
+}
+
+#toggleSecurityCode {
+  background: none;
+  border: none;
+  position: absolute;
+  right: 10px;
+  cursor: pointer;
+}
+
+#toggleSecurityCode i {
+  font-size: 18px;
+}
+
+</style>
+<body>
+    <h1>Sign in</h1>
+    <form method="post" action="/study/auth/signin">
+        <input type="radio" id="student" name="role" value="student" required>
+        <label for="student">Student</label>&nbsp;&nbsp;&nbsp;
+        <input type="radio" id="teacher" name="role" value="teacher" required>
+        <label for="teacher">Teacher</label>&nbsp;&nbsp;&nbsp;
+        <input type="radio" id="admin" name="role" value="admin" required>
+        <label for="admin">Admin</label><br><br>
+        <label for="username">username</label><br>
+        <input type="text" id="username" placeholder="Enter your username" name="username" required><br><br>
+        <div class="hidden" id="adminFields">
+            <label for="passkey">passkey</label><br>
+            <div class="password-content">
+                <div class="password-container">
+                  <input type="password" name="passkey" id="passkey" placeholder="Enter your passkey" required>
+                  <button id="togglePasskey" type="button">
+                    <i id="eyeIconPasskey" class="fa fa-eye"></i>
+                  </button>
+                </div>
+            </div><br>
+            <label for="securityCode">security code</label><br>
+            <div class="password-content">
+                <div class="password-container">
+                  <input type="password" name="securityCode" id="securityCode" placeholder="Enter security code" required>
+                  <button id="toggleSecurityCode" type="button">
+                    <i id="eyeIconSecurityCode" class="fa fa-eye"></i>
+                  </button>
+                </div>
+            </div><br>
+        </div>
+        <label for="password">password</label><br>
+        <div class="password-content">
+            <div class="password-container">
+              <input type="password" id="password" name="password" placeholder="Enter your password" required>
+              <button id="togglePassword" type="button">
+                <i id="eyeIconPassword" class="fa fa-eye"></i>
+              </button>
+            </div>
+        </div><br>
+        <button type="submit" class="submit-btn">Sign in</button>
+    </form>
+
+    <script>
+        document.querySelectorAll('input[name="role"]').forEach(roleInput => {
+            roleInput.addEventListener("change", function() {
+                const adminFields = document.getElementById("adminFields");
+                if(this.value === "admin") {
+                    adminFields.classList.remove("hidden");
+                    document.getElementById('passkey').required = true;
+                    document.getElementById('securityCode').required = true; 
+                    document.getElementById('username').value = "";
+                    document.getElementById('passkey').value = "";
+                    document.getElementById('securityCode').value = "";
+                    document.getElementById('password').value = "";
+                } else{
+                    adminFields.classList.add("hidden");
+                    document.getElementById('passkey').required = false;
+                    document.getElementById('securityCode').required = false; 
+                    document.getElementById('username').value = "";
+                    document.getElementById('password').value = "";
+                }
+            });
+        });
+
+
+        //password with eye icon
+
+        document.getElementById('togglePassword').addEventListener('click', function () {
+            const passwordField = document.getElementById('password');
+            const eyeIcon = document.getElementById('eyeIconPassword');
+            const type = passwordField.getAttribute('type') === 'password' ? 'text' : 'password';
+            passwordField.setAttribute('type', type);
+            eyeIcon.classList.toggle('fa-eye');
+            eyeIcon.classList.toggle('fa-eye-slash');
+        });
+
+        document.getElementById('togglePasskey').addEventListener('click', function () {
+            const passkeyField = document.getElementById('passkey');
+            const eyeIcon = document.getElementById('eyeIconPasskey');
+            const type = passkeyField.getAttribute('type') === 'password' ? 'text' : 'password';
+            passkeyField.setAttribute('type', type);
+            eyeIcon.classList.toggle('fa-eye');
+            eyeIcon.classList.toggle('fa-eye-slash');   
+        });
+
+        document.getElementById('toggleSecurityCode').addEventListener('click', function () {
+            const securityCodeField = document.getElementById('securityCode');
+            const eyeIcon = document.getElementById('eyeIconSecurityCode');
+            const type = securityCodeField.getAttribute('type') === 'password' ? 'text' : 'password';
+            securityCodeField.setAttribute('type', type);
+            eyeIcon.classList.toggle('fa-eye');
+            eyeIcon.classList.toggle('fa-eye-slash');   
+        });
+    </script>
+</body>

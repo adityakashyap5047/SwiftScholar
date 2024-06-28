@@ -1,0 +1,362 @@
+<% layout("/layouts/boilerplate") %>
+<style>
+    h3{
+        color: white;
+    }
+    li{
+        color: white;
+    }
+    h4{
+        color: white;
+    }
+    p{
+        color: white;
+    }
+    .doubtImage{
+        width: 300px;
+    }
+    .solutionImage{
+        width: 200px;
+    }
+
+    /* profile styling */
+    .profile-body{
+        display: flex;
+        justify-content: center;
+    }
+    .profile-container {
+        background-color: white;
+        border-radius: 10px;
+        box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        padding: 20px;
+        width: 300px;
+        text-align: center;
+        margin: 25px 0;
+    }
+    .profile-picture {
+        border-radius: 50%;
+        width: 100px;
+        height: 100px;
+        object-fit: cover;
+        margin-bottom: 20px;
+    }
+    .name {
+        font-size: 24px;
+        font-weight: bold;
+        margin-bottom: 10px;
+    }
+    .username {
+        font-size: 18px;
+        color: gray;
+        margin-bottom: 20px;
+    }
+    .class, .school, .contact-info {
+        font-size: 16px;
+        margin-bottom: 10px;
+    }
+    .contact-info {
+        margin-top: 20px;
+    }
+    .profile-buttons {
+        margin: 20px 0;
+        display: flex;
+        justify-content: space-around;
+    }
+    .profile-button {
+        padding: 10px 20px;
+        border: none;
+        border-radius: 5px;
+        cursor: pointer;
+        font-size: 14px;
+        background-color: #170acd;
+    }
+
+    .dbt-posted-heading{
+        text-align: center;
+    }
+
+    a{
+        text-decoration: none;
+        color: black;
+    }
+
+         .doubts-container {
+            margin: 30px;
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+        }
+        .doubt {
+            background-color: #f9f9f9;
+            border: 1px solid #ddd;
+            width: 500px;
+            border-radius: 5px;
+            padding: 10px;
+            margin: 10px;
+        }
+        .doubt-status {
+            font-size: 14px;
+            color: #888;
+        }
+        .teacher-name{
+            margin-top: 10px;
+            color: #555;
+        }
+        .teacher-response {
+            /* margin-top: 10px; */
+            font-size: 14px;
+            color: #555;
+        }
+        .images {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 10px;
+        }
+        .image {
+            width: 50px;
+            height: 50px;
+            object-fit: cover;
+            border-radius: 5px;
+            border: 1px solid #ddd;
+            cursor: pointer;
+        }
+        .review{
+            margin-top: 20px;
+        }
+        .student-comment{
+            font-size: 14px;
+            color: #555;
+            margin-top: -15px;
+        }
+
+        @media (max-width: 1200px) {
+            .doubts-container {
+                margin: 0;
+            }
+            .doubt {
+                width: 425px;
+            }
+        }
+
+        @media (max-width: 1060px) {
+            .doubts-container{
+                margin: 30px;
+            }
+            .doubt {
+                width: 400px;
+            }
+        }
+
+        @media (max-width: 990px) {
+            .doubt {
+                width: 600px;
+            }
+        }
+
+        @media (max-width: 710px) {
+            .doubt {
+                width: 500px;
+            }
+        }
+
+        @media (max-width: 600px) {
+            .doubt {
+                width: 400px;
+            }
+        }
+
+        @media (max-width: 490px) {
+            .doubt {
+                width: 300px;
+            }
+        }
+
+        /* Modal styles */
+        .modal {
+            display: none; 
+            position: fixed; 
+            z-index: 1; 
+            left: 0;
+            top: 0;
+            width: 100%;
+            height: 100%;
+            overflow: auto; 
+            background-color: rgb(0,0,0); 
+            background-color: rgba(0,0,0,0.9);
+        }
+        .modal-content {
+            position: relative;
+            margin: 200px auto auto auto;
+            padding: 0;
+            width: 80%;
+            max-width: 700px;
+        }
+        .modal-content .modal-heading-text {
+            color: #134f8b;
+            font-size: 20px;
+            text-align: center;
+            margin: 10px 0;
+        }
+        .modal-content img {
+            width: 100%;
+            height: auto;
+        }
+        .close {
+            position: absolute;
+            top: 100px;
+            right: 25px;
+            color: #fff;
+            font-size: 35px;
+            font-weight: bold;
+            cursor: pointer;
+            z-index: 10;
+        }
+        .prev, .next {
+            cursor: pointer;
+            position: absolute;
+            top: 50%;
+            width: auto;
+            padding: 0 16px;
+            color: white;
+            font-weight: bold;
+            font-size: 20px;
+            transition: 0.6s ease;
+            border-radius: 0 3px 3px 0;
+            user-select: none;
+        }
+        .prev {
+            left: 0;
+            border-radius: 3px 0 0 3px;
+        }
+        .next {
+            right: 0;
+            border-radius: 3px 0 0 3px;
+        }
+        .prev:hover, .next:hover {
+            color: rgba(0,0,0,0.8);
+        }
+</style>
+<link rel="stylesheet" href="/css/ratings.css">
+<body>
+    <div class="profile-body">
+     <div class="profile-container">
+         <img src="<%= student.profileImage %>" alt="Profile Picture" class="profile-picture">
+         <div class="name"><%= student.name %></div>
+         <div class="username">@<%= student.username %></div>
+         <div class="class">Class: <%= student.class %></div>
+         <div class="school">School: <%= student.school %></div>
+         <div class="contact-info">
+             <div>Phone: <%= student.contactNo %></div>
+             <div>Email: <%= student.emailId %></div>
+         </div>
+        <div class="profile-buttons">
+            <% if(currUser && currUser._id.equals(student._id)) {%>
+                <form action="/students/<%= student._id %>/edit">
+                    <button class="profile-button">Edit profile</button>
+                </form>
+                <form action="/doubts/<%= student._id %>/doubt">
+                    <button class="profile-button">Add Doubt</button>
+                </form>
+            <% } %>
+        </div>
+    </div>
+</div>
+<h3 class="dbt-posted-heading">Doubts Posted</h3>
+<div class="doubts-container">
+<% let dbtCount = 1 %>
+<% for(dbt of studentDoubts.doubts) {%>
+    <% if(dbt) {%>
+        <div class="doubt">
+                    <a href="/doubts/<%= student._id %>/<%= dbt.doubt._id %>/<%= dbt.teacher._id %>/doubt">
+                    <div><strong>Doubt <%= dbtCount %>: </strong><%= dbt.doubt.title %></div></a>
+                    <div class="images">
+                        <% for(img of dbt.doubt.image) {%>
+                            <img src="<%= img %>" class="image" alt="doubt image">
+                        <% } %>
+                    </div>
+                    <% if(dbt.solution.length) {%>
+                        <div class="doubt-status">Status: Answered</div>
+                    <% } %>
+                    <% if(!dbt.solution.length) {%>
+                        <div class="doubt-status">Status: Pending</div>
+                    <% } %>
+                    <% if(dbt.teacher) {%>
+                        <div class="teacher-name"><strong>Teacher: </strong><%= dbt.teacher.name %>&nbsp;&nbsp;(<%= dbt.teacher.subject %>)</div>
+                    <% } %>
+                    <% if(!dbt.teacher) {%>
+                        <div class="teacher-response"><strong>*<i>Teacher doesn't exist</i></strong></div>
+                    <% } %>
+                    <% if(dbt.solution.length) {%>
+                        <div class="images">
+                            <% for(img of dbt.solution[0].image) {%>
+                                <img src="<%= img %>" class="image" alt="solution image">
+                            <% } %>
+                        </div>
+                    <div class="teacher-response"><strong>Suggestion:</strong> <%= dbt.solution[0].suggestion %></div>
+                    <div class="review">
+                        <div class="teacher-name"><strong>Your Review:</strong></div>
+                    </div>
+                    <% if(!dbt.review.length && dbt.teacher) {%>
+                        <div class="teacher-response"><strong>*<i>You didn't give review yet</i></strong></div>
+                    <% } %>
+                    <% if(dbt.review.length) {%>
+                        <p class="starability-result" data-rating="<%= dbt.review[0].rating %>"></p>
+                        <div class="student-comment"><strong><%= dbt.review[0].comments %></strong></div>
+                    <% } %>
+                    <% } %>
+                </div>
+            <% dbtCount ++ %>
+            <% } %>
+            <% } %>
+        </div>
+
+
+         <!-- Modal for Image Viewer -->
+    <div id="myModal" class="modal">
+        <span class="close" onclick="closeModal()">&times;</span>
+        <div class="modal-content">
+            <div class="modal-heading-text">Viewing images related to the doubt and its solution</div>
+            <img id="modalImage" src="" alt="Modal Image">
+            <a class="prev" onclick="changeImage(-1)">&#10094;</a>
+            <a class="next" onclick="changeImage(1)">&#10095;</a>
+        </div>
+    </div>
+
+
+
+    
+    <script>
+        let currentImageIndex = 0;
+        let currentImageArray = [];
+
+        document.querySelectorAll('.doubt').forEach(doubt => {
+            const images = doubt.querySelectorAll('.image');
+            images.forEach((img, index) => {
+                img.addEventListener('click', () => {
+                    currentImageArray = Array.from(images);
+                    currentImageIndex = index;
+                    openModal(img.src);
+                });
+            });
+        });
+
+        function openModal(src) {
+            document.getElementById('myModal').style.display = 'block';
+            document.getElementById('modalImage').src = src;
+        }
+
+        function closeModal() {
+            document.getElementById('myModal').style.display = 'none';
+        }
+
+        function changeImage(direction) {
+            currentImageIndex += direction;
+            if (currentImageIndex >= currentImageArray.length) {
+                currentImageIndex = 0;
+            } else if (currentImageIndex < 0) {
+                currentImageIndex = currentImageArray.length - 1;
+            }
+            document.getElementById('modalImage').src = currentImageArray[currentImageIndex].src;
+        }
+    </script>
+</body> 

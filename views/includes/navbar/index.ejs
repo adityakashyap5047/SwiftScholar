@@ -1,0 +1,117 @@
+<style>
+  nav{
+    background-color: #ffb804;
+    /* background-color: #134f8b; */
+  }
+
+.navbar-toggler-container{
+  display: flex;
+  align-items: center;
+}
+
+.navbar-toggler{
+    border: none;
+}
+
+.navbar-toggler:focus {
+    outline: none;
+    box-shadow: none;
+    border: none;
+}
+
+.navbar-nav{
+  align-items: center;
+}
+
+.nav-link {
+    color: #134f8b;
+}
+
+.nav-link:hover {
+    color: #0a85a3;
+}
+
+.icon{
+    color: #134f8b;
+}
+
+.icon:hover {
+    color: #0a85a3;
+}
+
+
+.top-solid-bell {
+    color: #ff4500;
+    display: none;
+}
+
+.top-regular-bell {
+    color: #ff4500;
+    display: none;
+}
+
+.bottom-solid-bell {
+    color: #ff4500;
+}
+
+.bottom-regular-bell {
+    color: #ff4500;
+}
+
+@media (max-width: 768px) {
+    .top-solid-bell {
+        display: inline;
+    }
+
+    .top-regular-bell {
+        display: inline;
+    }
+
+    .bottom-solid-bell {
+        display: none;
+    }
+
+    .bottom-regular-bell {
+        display: none;
+    }
+
+    .navbar-nav { 
+        margin-left: 20px !important;
+        align-items: start;
+    }
+} 
+</style>
+
+<nav class="navbar navbar-expand-md sticky-top border-bottom">
+  <div class="container-fluid">
+    <a class="navbar-brand mt-3" href="/study"><img src="/assests/logo.png" alt="Logo Image" height="60px"></a>
+    <div class="navbar-toggler-container">
+      <%- include("./teacherTopBell.ejs") %>
+      <%- include("./studentTopBell.ejs") %>
+        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <i class="fa-solid fa-bars icon"></i>
+      </button>
+    </div>
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <ul class="navbar-nav ms-auto mb-2 mb-lg-0">
+        <%- include("./teacherBottomBell.ejs") %>
+        <%- include("./studentBottomBell.ejs") %>
+        <li class="nav-item">
+          <a class="nav-link" aria-current="page" href="/study#aboutadd">About</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="/study#helpadd">Help</a>
+        </li>
+        <%- include("./userSection.ejs") %>
+      </ul>
+    </div>
+  </div>
+</nav>
+
+<script>
+  document.querySelector('.navbar-toggler').addEventListener('click', function() {
+    const icon = this.querySelector('i');
+    icon.classList.toggle('fa-bars');
+    icon.classList.toggle('fa-xmark');
+  });
+</script>

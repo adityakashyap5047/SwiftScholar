@@ -1,0 +1,70 @@
+<% layout("/layouts/boilerplate") %>
+<style>
+    label{
+        color: white;
+    }
+    #image{
+        background-color: #ddd;
+    }
+</style>
+<body>
+    <form action="/doubts/<%= studentId %>/<%= doubtId %>/<%= teacherId %>/solution" method="post" enctype="multipart/form-data">
+        <div id="uploadForm">
+            <label for="image">Upload Image</label>
+            <input type="file" id="image" name="solution[image]" required>
+            <button id="addImageButton" type="button">Add Image Field</button><br>
+        </div>
+        <label for="suggestion">Suggestion</label><br>
+        <textarea name="solution[suggestion]" id="suggestion" placeholder="write any suggestion" required></textarea><br><br>
+        <button>Submit</button>
+    </form>
+
+    <script>
+         document.addEventListener('DOMContentLoaded', function() {
+    const addButton = document.getElementById('addImageButton');
+    const uploadForm = document.getElementById('uploadForm');
+    const maxImages = 9; // Maximum number of image upload fields allowed
+  
+    addButton.addEventListener('click', function() {
+      if (uploadForm.children.length / 3 >= maxImages) {
+        alert(`You can only upload a maximum of ${maxImages - 2} images.`);
+        return; 
+      }
+  
+      // Create label element
+      const label = document.createElement('label');
+      label.setAttribute('for', `image${uploadForm.children.length}`);
+      label.innerHTML = '<span>Upload Image</span> &nbsp;';
+  
+      // Create input element
+      const input = document.createElement('input');
+      const br = document.createElement('br');
+      input.setAttribute('type', 'file');
+      input.setAttribute('id', `image${uploadForm.children.length}`);
+      br.setAttribute('id', `br${uploadForm.children.length}`)
+      input.setAttribute('name', `solution[image]`);
+      input.setAttribute('id', `image`);
+      input.setAttribute('class', `mt-3`);
+      input.setAttribute('required', '');
+  
+      // Create remove button
+      const removeButton = document.createElement('button');
+      removeButton.textContent = 'Remove';
+      removeButton.addEventListener('click', function() {
+        uploadForm.removeChild(label);
+        uploadForm.removeChild(input);
+        uploadForm.removeChild(removeButton);
+        uploadForm.removeChild(br);
+      });
+  
+      // Append label, input, remove button, and line break to uploadForm
+      uploadForm.appendChild(label);
+      uploadForm.appendChild(input);
+      uploadForm.appendChild(removeButton);
+      uploadForm.appendChild(br);
+    });
+  });
+
+
+    </script>
+</body>

@@ -1,0 +1,17 @@
+<% layout("/layouts/boilerplate") %>
+<style>
+    h2{
+        color: white;
+    }
+</style>
+<link rel="stylesheet" href="/css/teachers/index.css">
+<body>
+    <h2>All Teachers</h2>
+    <form method="get" action="/teachers/new">
+        <button>Add new teachers</button>
+    </form>
+    <% for(teacher of allTeachers) { %>
+        <li><a href="/teachers/<%= teacher._id %>"><%= teacher.name %></a></li>
+    <% } %>
+</body>
+</html>
