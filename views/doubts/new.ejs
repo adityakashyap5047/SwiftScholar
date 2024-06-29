@@ -13,8 +13,16 @@
     #addImageButton{
         margin-left: -5px;
     }
+    #maxLimitMessage{
+        display: none;
+        text-align: center;
+    }
 </style>
 <body>
+    <div id="maxLimitMessage" class="alert alert-danger alert-dismissible fade show col-lg-6 offset-lg-3 offset-md-3 col-md-6" role="alert">
+        <button type="button" id="close-button" class="btn-close"></button>
+        You can only upload a maximum of 7 images.
+    </div>
     <h3>Add a doubt</h3>
     <form action="/doubts/<%= studentId %>/doubt" method="post" enctype="multipart/form-data">
         <div id="uploadForm">
@@ -49,7 +57,12 @@
     addButton.addEventListener('click', function() {
       // Check if maximum limit reached
       if (uploadForm.children.length / 3 >= maxImages) {
-        alert(`You can only upload a maximum of ${maxImages - 2} images.`);
+        const maxLimitMessage = document.getElementById('maxLimitMessage');
+        const closeButton = document.getElementById('close-button');
+        maxLimitMessage.style.display = 'block';
+        closeButton.addEventListener('click', function() {
+          maxLimitMessage.style.display = 'none';
+        });
         return; 
       }
   

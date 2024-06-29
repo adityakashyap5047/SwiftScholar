@@ -6,8 +6,16 @@
     #image{
         background-color: #ddd;
     }
+    #maxLimitMessage{
+        display: none;
+        text-align: center;
+    }
 </style>
 <body>
+  <div id="maxLimitMessage" class="alert alert-danger alert-dismissible fade show col-lg-6 offset-lg-3 offset-md-3 col-md-6" role="alert">
+    <button type="button" id="close-button" class="btn-close"></button>
+    You can only upload a maximum of 7 images.
+  </div>
     <form action="/doubts/<%= studentId %>/<%= doubtId %>/<%= teacherId %>/solution" method="post" enctype="multipart/form-data">
         <div id="uploadForm">
             <label for="image">Upload Image</label>
@@ -27,8 +35,13 @@
   
     addButton.addEventListener('click', function() {
       if (uploadForm.children.length / 3 >= maxImages) {
-        alert(`You can only upload a maximum of ${maxImages - 2} images.`);
-        return; 
+        const maxLimitMessage = document.getElementById('maxLimitMessage');
+        const closeButton = document.getElementById('close-button');
+        maxLimitMessage.style.display = 'block';
+        closeButton.addEventListener('click', function() {
+          maxLimitMessage.style.display = 'none';
+        });
+        return;  
       }
   
       // Create label element
