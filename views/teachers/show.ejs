@@ -49,7 +49,13 @@
         border-radius: 5px;
         cursor: pointer;
         font-size: 14px;
-        background-color: #170acd;
+        background-color: #0a85a3;
+    }
+    .edit-button:hover{
+        background-color: #3b90e5;
+    }
+    .delete-button:hover{
+        background-color: #e74c3c;
     }
 
     /* doubt styling */
@@ -232,10 +238,10 @@
            <div class="profile-buttons">
                <% if(currUser && currUser._id.equals(teacher._id)) {%>
                    <form action="/teachers/<%= teacher._id %>/edit">
-                       <button class="profile-button">Edit profile</button>
+                       <button class="profile-button edit-button">Edit profile</button>
                    </form>
                    <form method="post" action="/teachers/<%= teacher._id %>/delete?_method=DELETE">
-                       <button class="profile-button">Delete profile</button>
+                       <button class="profile-button delete-button">Delete profile</button>
                    </form>
                <% } %>
            </div>

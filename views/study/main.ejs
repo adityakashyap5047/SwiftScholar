@@ -19,7 +19,7 @@
 
 #heading{
     font-size: 3rem;
-    margin-top: 100px;
+    margin-top: 50px;
     color: #008000;
 }
 
@@ -59,13 +59,18 @@
     display: none;
 }
 
-#study-boy-image{
+.study-boy-image{
     height: 400px;
 }
 
 @media(max-width: 992px){
+    .text{
+        padding: 0;
+        margin-top: 75px;
+    }
     #heading{
         font-size: 2.5rem;
+        margin: 0;
     }
 
     #punchline{
@@ -76,7 +81,7 @@
         font-size: 1.5rem;
     }
 
-    #study-boy-image{
+    .study-boy-image{
         height: 300px;
     }
 }
@@ -151,7 +156,12 @@
     <div class="main">
         <div class="text">
             <h1 id="heading">Your Doubts, Our Solutions</h1>
-            <div class="image image-mobile"><img src="/assests/study-boy.jpg" id="study-boy-image" alt="study boy image"></div>
+            <div class="image image-mobile">
+                <picture>
+                    <source type="image/webp" srcset="/assests/study-boy-image.webp" class="study-boy-image">
+                    <img src="/assests/study-boy-image.jpg" class="study-boy-image" alt="study boy image">
+                </picture>
+            </div>
             <h2 id="punchline">Get Clear, Get Ahead</h2>
             <h3 id="subheading">Learn Better, Together</h3>
             <form action="/study/auth/signup">
@@ -159,7 +169,10 @@
             </form>
         </div>
         <div class="image image-web">
-            <img src="/assests/study-boy.jpg" id="study-boy-image" alt="study girl image">
+            <picture>
+                <source type="image/webp" srcset="/assests/study-boy-image.webp" class="study-boy-image">
+                <img src="/assests/study-boy-image.jpg" class="study-boy-image" alt="study boy image">
+            </picture>
         </div>
     </div>
 </body>
