@@ -1,26 +1,20 @@
 <% layout("/layouts/boilerplate") %>
 <style>
-    body {
-        font-family: Arial, sans-serif;
-    }
-    body > .container {
-        text-align: center;
-    }
-
-    h1 {
-        margin-top: 20px;
+    #signin-heading {
+        margin-top: 10px;
         color: #0a85a3;
+        text-align: center;
     }
 
     label {
         color: #134f8b;
     }
-
-    .radio-group {
-        margin-bottom: 15px;
+    .radio-button-container{
+      margin-top: 16px;
+      text-align: center;
     }
-    .radio-group label {
-        margin-right: 10px;
+    .submit-button-container{
+      text-align: center;
     }
     .submit-btn {
         display: inline-block;
@@ -41,13 +35,6 @@
 
 
     /* password with eye icon */
-    .password-content {
-  font-family: Arial, sans-serif;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-}
-
 .password-container {
   position: relative;
   display: flex;
@@ -81,6 +68,10 @@
   font-size: 18px;
 }
 
+.fa{
+  color: #0a85a3;
+}
+
 #togglePasskey {
   background: none;
   border: none;
@@ -107,47 +98,61 @@
 
 </style>
 <body>
-    <h1>Sign in</h1>
-    <form method="post" action="/study/auth/signin">
-        <input type="radio" id="student" name="role" value="student" required>
-        <label for="student">Student</label>&nbsp;&nbsp;&nbsp;
-        <input type="radio" id="teacher" name="role" value="teacher" required>
-        <label for="teacher">Teacher</label>&nbsp;&nbsp;&nbsp;
-        <input type="radio" id="admin" name="role" value="admin" required>
-        <label for="admin">Admin</label><br><br>
-        <label for="username">username</label><br>
-        <input type="text" id="username" placeholder="Enter your username" name="username" required><br><br>
-        <div class="hidden" id="adminFields">
-            <label for="passkey">passkey</label><br>
-            <div class="password-content">
+    <div class="row">
+      <div class="col-md-8 offset-md-2">
+        <h2 id="signin-heading">Sign in</h2>
+      <form method="post" action="/study/auth/signin" class="needs-validation" novalidate>
+          <div class="radio-button-container">
+            <div class="form-check form-check-inline">
+              <input type="radio" id="student" class="form-check-input" name="role" value="student" required>
+              <label for="student" class="form-check-label">Student</label>
+            </div>
+            <div class="form-check form-check-inline">
+              <input type="radio" id="teacher" class="form-check-input" name="role" value="teacher" required>
+              <label for="teacher" class="form-check-label">Teacher</label> 
+            </div>
+            <div class="form-check form-check-inline">
+              <input type="radio" id="admin" class="form-check-input" name="role" value="admin" required>
+              <label for="admin" class="form-check-label">Admin</label>
+            </div>
+          </div>
+          <div class="mb-3 mt-3">
+            <label for="username" class="form-label">username</label><br>
+            <input type="text" id="username" class="form-control" placeholder="Enter your username" name="username" required>
+          </div>
+          <div class="hidden" id="adminFields">
+              <div class="mb-3">
+                <label for="passkey" class="form-label">passkey</label><br>
                 <div class="password-container">
-                  <input type="password" name="passkey" id="passkey" placeholder="Enter your passkey" required>
+                  <input type="password" name="passkey" id="passkey" class="form-control" placeholder="Enter your passkey" required>
                   <button id="togglePasskey" type="button">
                     <i id="eyeIconPasskey" class="fa fa-eye"></i>
                   </button>
                 </div>
-            </div><br>
-            <label for="securityCode">security code</label><br>
-            <div class="password-content">
-                <div class="password-container">
-                  <input type="password" name="securityCode" id="securityCode" placeholder="Enter security code" required>
-                  <button id="toggleSecurityCode" type="button">
-                    <i id="eyeIconSecurityCode" class="fa fa-eye"></i>
-                  </button>
-                </div>
-            </div><br>
-        </div>
-        <label for="password">password</label><br>
-        <div class="password-content">
-            <div class="password-container">
-              <input type="password" id="password" name="password" placeholder="Enter your password" required>
-              <button id="togglePassword" type="button">
-                <i id="eyeIconPassword" class="fa fa-eye"></i>
-              </button>
-            </div>
-        </div><br>
-        <button type="submit" class="submit-btn">Sign in</button>
-    </form>
+              </div>
+              <div class="mb-3">
+                <label for="securityCode" class="form-label">security code</label><br>
+                  <div class="password-container">
+                    <input type="password" name="securityCode" id="securityCode" class="form-control" placeholder="Enter security code" required>
+                    <button id="toggleSecurityCode" type="button">
+                      <i id="eyeIconSecurityCode" class="fa fa-eye"></i>
+                    </button>
+                  </div>
+              </div>
+          </div>
+          <div class="mb-3">
+            <label for="password" class="form-label">password</label><br>
+              <div class="password-container">
+                <input type="password" id="password" class="form-control" name="password" placeholder="Enter your password" required>
+                <button id="togglePassword" type="button">
+                  <i id="eyeIconPassword" class="fa fa-eye"></i>
+                </button>
+              </div>
+          </div>
+          <div class="submit-button-container"><button type="submit" class="submit-btn">Sign in</button></div>
+      </form>
+      </div>
+    </div>
 
     <script>
         document.querySelectorAll('input[name="role"]').forEach(roleInput => {

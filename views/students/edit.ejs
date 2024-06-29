@@ -1,33 +1,68 @@
 <% layout("/layouts/boilerplate") %>
 <style>
-    h2{
+    #student-edit-heading{
         color: #0a85a3;
+        text-align: center;
+        margin-top: 10px;
     }
     label{
         color: #134f8b;
     }    
     #profileImage{
-        background-color: #ddd;
+        background-color: #fff;
+    }
+    .submit-btn-container{
+        text-align: center;
+        margin-bottom: 10px;
+    }
+    .edit-btn{
+        padding: 10px 20px;
+        border: none;
+        border-radius: 5px;
+        cursor: pointer;
+        font-size: 14px;
+        background-color: #0a85a3;
+    }
+    .edit-btn:hover{
+        background-color: #3b90e5;
     }
 </style>
 <body>
-    <h2>Edit your profile</h2>
-    <form method="post" action="/students/<%= student._id %>?_method=PUT" enctype="multipart/form-data">
-        <label for="name">name</label><br>
-        <input type="text" id="name" name="student[name]" value="<%= student.name %>" required><br><br>
-        <label for="profileImage">upload your new profile image</label><br>
-        <input type="file" id="profileImage" name="student[profileImage]"><br><br>
-        <label for="class">class</label><br>
-        <input type="text" id="class" name="student[class]" value="<%= student.class %>" required><br><br>
-        <label for="school">school</label><br>
-        <input type="text" id="school" name="student[school]" value="<%= student.school %>" required><br><br>
-        <label for="contactNo">contact number</label><br>
-        <input type="text" id="contactNo" name="student[contactNo]" value="<%= student.contactNo %>" required><br><br>
-        <label for="emailId">email id</label><br>
-        <input type="text" id="emailId" name="student[emailId]" value="<%= student.emailId %>" required><br><br>
-        <input type="hidden" name="student[username]" value="<%= student.username %>">
-        <input type="hidden" name="type" value="Student">
-        <input type="hidden" name="password" value="none">
-        <button>Submit</button>
-    </form>
+<div class="row" >
+    <div class="col-md-8 offset-md-2">
+        <h2 id="student-edit-heading">Edit your profile</h2>
+        <form method="post" action="/students/<%= student._id %>?_method=PUT" class="needs-validation" novalidate enctype="multipart/form-data">
+            <div class="mb-3">
+                <label for="name" class="form-label">name</label>
+                <input type="text" id="name" class="form-control" name="student[name]" value="<%= student.name %>" required>
+            </div>
+            <div class="mb-3">
+                <label for="profileImage" class="form-label">upload your new profile image</label>
+                <input type="file" id="profileImage" class="form-control" name="student[profileImage]">
+            </div>
+            <div class="mb-3">
+                <label for="class" class="form-label">class</label>
+                <input type="text" id="class" class="form-control" name="student[class]" value="<%= student.class %>" required>
+            </div>
+            <div class="mb-3">
+                <label for="school" class="form-label">school</label>
+                <input type="text" id="school" class="form-control" name="student[school]" value="<%= student.school %>" required>
+            </div>
+            <div class="mb-3">
+                <label for="contactNo" class="form-label">contact number</label>
+                <input type="text" id="contactNo" class="form-control" name="student[contactNo]" value="<%= student.contactNo %>" required>
+            </div>
+            <div class="mb-3">
+                <label for="emailId" class="form-label">email id</label>
+                <input type="text" id="emailId" class="form-control" name="student[emailId]" value="<%= student.emailId %>" required>
+            </div>
+            <input type="hidden" name="student[username]" value="<%= student.username %>">
+            <input type="hidden" name="type" value="Student">
+            <input type="hidden" name="password" value="none">
+            <div class="submit-btn-container">
+                <button class="edit-btn">Submit</button>
+            </div>
+        </form>
+    </div>
+</div>
 </body>

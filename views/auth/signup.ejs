@@ -1,32 +1,26 @@
 <% layout("/layouts/boilerplate") %>
 <style>
-    body {
-        font-family: Arial, sans-serif;
-    }
-    body > .container {
-        text-align: center;
-    }
-
-    h2 {
-        margin-top: 20px;
+    #signup-heading {
+        margin-top: 10px;
         color: #0a85a3;
+        text-align: center;
     }
 
     label {
         color: #134f8b;
     }
-
-    .radio-group {
-        margin-bottom: 15px;
-    }
-    .radio-group label {
-        margin-right: 10px;
+    .radio-button-container{
+        margin-top: 16px;
+        text-align: center;
     }
     .field-group {
         margin-bottom: 15px;
     }
     #profileImage {
-        background-color: #ddd;
+        background-color: #fff;
+    }
+    .submit-button-container{
+        text-align: center;
     }
     .submit-btn {
         display: inline-block;
@@ -46,13 +40,6 @@
     }
 
     /* password with eye icon */
-    .password-content {
-  font-family: Arial, sans-serif;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-}
-
 .password-container {
   position: relative;
   display: flex;
@@ -86,6 +73,10 @@
   font-size: 18px;
 }
 
+.fa{
+    color: #0a85a3;
+}
+
 #togglePasskey {
   background: none;
   border: none;
@@ -113,109 +104,107 @@
 
 </style>
 <body>
-    <div class="container">
-        <h2>Sign up</h2>
-        <form id="signUpForm" method="post" action="/study/auth/signup" enctype="multipart/form-data">
-            <div class="radio-group">
-                <input type="radio" id="student" name="role" value="student" required>
-                <label for="student">Student</label>
-                <input type="radio" id="teacher" name="role" value="teacher" required>
-                <label for="teacher">Teacher</label>
-                <input type="radio" id="admin" name="role" value="admin" required>
-                <label for="admin">Admin</label>
-            </div>
-            
-            <!-- Common Fields -->
-            <div class="field-group">
-                <label for="name">Name:</label><br>
-                <input type="text" id="name" name="student[name]" required>
-            </div>
-            <div class="field-group">
-                <label for="profileImage">Upload your Profile Picture:</label><br>
-                <input type="file" id="profileImage" name="student[profileImage]" required>
-            </div>
-            <div class="field-group">
-                <label for="email">Email ID:</label><br>
-                <input type="email" id="email" name="student[emailId]" required>
-            </div>
-            <div class="field-group">
-                <label for="contact">Contact Number:</label><br>
-                <input type="text" id="contact" name="student[contactNo]" required>
-            </div>
-            <div class="field-group">
-                <label for="username">Username:</label><br>
-                <input type="text" id="username" name="student[username]" required>
-            </div>
-                <input type="hidden" id="type" name="type" value="Student">
-            </div>
-
-            <!-- Student-Specific Fields -->
-            <div class="field-group hidden" id="studentFields">
-                <div>
-                    <label for="class">Class:</label><br>
-                    <input type="text" id="class" name="student[class]">
-                </div>
-                <div>
-                    <label for="school">School:</label><br>
-                    <input type="text" id="school" name="student[school]">
-                </div>
-            </div>
-
-            <!-- Teacher-Specific Fields -->
-            <div class="field-group hidden" id="teacherFields">
-                <div>
-                    <label for="subject">Subject:</label><br>
-                    <input type="text" id="subject" name="teacher[subject]">
-                </div><br>
-                <div>
-                    <label for="description">Description:</label><br>
-                    <textarea id="description" name="teacher[description]"></textarea>
-                </div>
-            </div>
-
-            <!-- Admin-Specific Fields -->
-            <div class="field-group hidden" id="adminFields">
-                <div>
-                    <label for="securityCode">Security Code</label><br>
-                    <div class="password-content">
-                        <div class="password-container">
-                          <input type="password" name="admin[securityCode]" id="securityCode" placeholder="Enter security code" required>
-                          <button id="toggleSecurityCode" type="button">
-                            <i id="eyeIconSecurityCode" class="fa fa-eye"></i>
-                          </button>
-                        </div>
-                    </div><br>
-                </div>
-            </div>
-
-            <!-- Teacher and Admin Specific Fields -->
-            <div class="field-group hidden" id="commonFields">
-                <div>
-                    <label for="passkey">Passkey:</label><br>
-                    <div class="password-content">
-                        <div class="password-container">
-                          <input type="password" name="passkey" id="passkey" placeholder="Enter your passkey" required>
-                          <button id="togglePasskey" type="button">
-                            <i id="eyeIconPasskey" class="fa fa-eye"></i>
-                          </button>
-                        </div>
-                    </div><br>
-                </div>
-            </div>
-
-            <div class="field-group">
-                <label for="password">Password:</label><br>
-                <div class="password-content">
-                    <div class="password-container">
-                      <input type="password" id="password" name="password" placeholder="Enter your password" required>
-                      <button id="togglePassword" type="button">
-                        <i id="eyeIconPassword" class="fa fa-eye"></i>
-                      </button>
+    <div class="row">
+        <div class="col-md-8 offset-md-2">
+            <h2 id="signup-heading">Sign up</h2>
+            <form id="signUpForm" method="post" action="/study/auth/signup" class="needs-validation" novalidate enctype="multipart/form-data">
+                <div class="radio-button-container">
+                    <div class="form-check form-check-inline">
+                        <input type="radio" id="student" class="form-check-input" name="role" value="student" required>
+                        <label for="student">Student</label>
                     </div>
-                </div><br>
-            </div>
-            <button type="submit" class="submit-btn">Sign up</button>
-        </form>
+                    <div class="form-check form-check-inline">
+                        <input type="radio" id="teacher" class="form-check-input" name="role" value="teacher" required>
+                        <label for="teacher">Teacher</label>
+                    </div>
+                    <div class="form-check form-check-inline">
+                        <input type="radio" id="admin" class="form-check-input" name="role" value="admin" required>
+                        <label for="admin">Admin</label>
+                    </div>
+                </div>
+                
+                <!-- Common Fields -->
+                <div class="field-group mb-3" >
+                    <label for="name" class="form-label">Name:</label>
+                    <input type="text" id="name" class="form-control" name="student[name]" placeholder="Enter your name" required>
+                </div>
+                <div class="field-group mb-3">
+                    <label for="profileImage" class="form-label">Upload your Profile Picture:</label>
+                    <input type="file" id="profileImage" class="form-control" name="student[profileImage]" required>
+                </div>
+                <div class="field-group mb-3">
+                    <label for="email" class="form-label">Email ID:</label>
+                    <input type="email" id="email" class="form-control" name="student[emailId]" placeholder="Enter your Email Id" required>
+                </div>
+                <div class="field-group mb-3">
+                    <label for="contact" class="form-label">Contact Number:</label>
+                    <input type="text" id="contact" class="form-control" name="student[contactNo]" placeholder="Enter your Contact Number" required>
+                </div>
+                <div class="field-group mb-3">
+                    <label for="username" class="form-label">Username:</label>
+                    <input type="text" id="username" class="form-control" name="student[username]" placeholder="Enter your username" required>
+                </div>
+                    <input type="hidden" id="type" name="type" value="Student">
+                
+    
+                <!-- Student-Specific Fields -->
+                <div class="field-group hidden" id="studentFields">
+                    <div class="mb-3">
+                        <label for="class" class="form-label">Class:</label>
+                        <input type="text" id="class" class="form-control" name="student[class]" placeholder="Enter youur class">
+                    </div>
+                    <div class="mb-3">
+                        <label for="school" class="form-label">School:</label>
+                        <input type="text" id="school" class="form-control" name="student[school]" placeholder="Enter your school">
+                    </div>
+                </div>
+    
+                <!-- Teacher-Specific Fields -->
+                <div class="field-group hidden" id="teacherFields">
+                    <div class="mb-3">
+                        <label for="subject" class="form-label">Subject:</label>
+                        <input type="text" id="subject" class="form-control" name="teacher[subject]" placeholder="Enter your subject">
+                    </div>
+                    <div class="mb-3">
+                        <label for="description" class="form-label">Description:</label>
+                        <textarea id="description" class="form-control" name="teacher[description]" placeholder="write a short description about yourself"></textarea>
+                    </div>
+                </div>
+    
+                <!-- Admin-Specific Fields -->
+                <div class="field-group hidden mb-3" id="adminFields">
+                        <label for="securityCode" class="form-label">Security Code</label>
+                        <div class="password-container">
+                            <input type="password" name="admin[securityCode]" id="securityCode" class="form-control" placeholder="Enter security code" required>
+                            <button id="toggleSecurityCode" type="button">
+                                <i id="eyeIconSecurityCode" class="fa fa-eye"></i>
+                            </button>
+                        </div>
+                </div>
+    
+                <!-- Teacher and Admin Specific Fields -->
+                <div class="field-group hidden mb-3" id="commonFields">
+                        <label for="passkey" class="form-label">Passkey:</label>
+                        <div class="password-container">
+                            <input type="password" name="passkey" id="passkey" class="form-control" placeholder="Enter your passkey" required>
+                            <button id="togglePasskey" type="button">
+                                <i id="eyeIconPasskey" class="fa fa-eye"></i>
+                            </button>
+                        </div>
+                </div>
+    
+                <div class="field-group mb-3">
+                    <label for="password" class="form-label">Password:</label>
+                        <div class="password-container">
+                          <input type="password" id="password" class="form-control" name="password" placeholder="Enter your password" required>
+                          <button id="togglePassword" type="button">
+                            <i id="eyeIconPassword" class="fa fa-eye"></i>
+                          </button>
+                        </div>
+                </div>
+                <div class="submit-button-container"><button type="submit" class="submit-btn">Sign up</button></div>
+            </form>
+        </div>
     </div>
 
     <script>

@@ -1,34 +1,67 @@
 <% layout("/layouts/boilerplate") %>
 <style>
-    h2{
+    .teacher-edit-heading{
         color: #0a85a3;
+        text-align: center;
+        margin-top: 10px;
     }
     label{
         color: #134f8b;
     }
     #profileImage{
-        background-color: #ddd;
+        background-color: #fff;
+    }
+    .submit-button{
+        padding: 10px 20px;
+        border: none;
+        border-radius: 5px;
+        cursor: pointer;
+        font-size: 14px;
+        background-color: #0a85a3;
+        margin: 3px 0 16px 0;
+    }
+    .submit-button:hover{
+        background-color: #3b90e5;
+    }
+    .submit-button-container{
+        text-align: center;
     }
 </style>
 <body>
-    <h2>Edit your profile</h2>
-    <form method="post" action="/teachers/<%= teacher._id %>?_method=PUT" enctype="multipart/form-data">
-        <label for="name">name</label><br>
-        <input type="text" id="name" name="teacher[name]" value="<%= teacher.name %>" required><br><br>
-        <label for="profileImage">upload your new profile image</label><br>
-        <input type="file" id="profileImage" name="teacher[profileImage]" value="<%= teacher.profileImage %>"><br><br>
-        <label for="subject">subject</label><br>
-        <input type="text" id="subject" name="teacher[subject]" value="<%= teacher.subject %>" required><br><br>
-        <label for="description">description</label><br>
-        <textarea name="teacher[description]" id="description" required ><%= teacher.description %></textarea><br><br>
-        <label for="contactNO">contact number</label><br>
-        <input type="text" name="teacher[contactNo]" id="contactNO" value="<%= teacher.contactNo %>" required><br><br>
-        <label for="emailId">email id</label><br>
-        <input type="email" name="teacher[emailId]" id="emailId" value="<%= teacher.emailId %>" required><br><br>
-        <input type="hidden" name="teacher[username]" value="<%= teacher.username %>">
-        <input type="hidden" name="type" value="Teacher">
-        <input type="hidden" name="passkey" value="none">
-        <input type="hidden" name="password" value="none">
-        <button>Submit</button>
-    </form>
+    <div class="row">
+        <div class="col-md-8 offset-md-2">
+            <h2 class="teacher-edit-heading">Edit your profile</h2>
+        <form method="post" action="/teachers/<%= teacher._id %>?_method=PUT" class="needs-validation" novalidate enctype="multipart/form-data">
+            <div class="mb-3">
+                <label for="name" class="form-label">name</label>
+                <input type="text" id="name" class="form-control" name="teacher[name]" value="<%= teacher.name %>" required>
+            </div>
+            <div class="mb-3">
+                <label for="profileImage" class="form-label">upload your new profile image</label>
+                <input type="file" id="profileImage" class="form-control" name="teacher[profileImage]" value="<%= teacher.profileImage %>">
+            </div>
+            <div class="mb-3">
+                <label for="subject" class="form-label">subject</label>
+                <input type="text" id="subject" class="form-control" name="teacher[subject]" value="<%= teacher.subject %>" required>
+            </div>
+            <div class="mb-3">
+                <label for="description" class="form-label">description</label>
+                <textarea name="teacher[description]" id="description" class="form-control" required ><%= teacher.description %></textarea>       
+            </div>
+            <div class="mb-3">
+                <label for="contactNO" class="form-label">contact number</label>
+                <input type="text" name="teacher[contactNo]" id="contactNO" class="form-control" value="<%= teacher.contactNo %>" required>
+            </div>
+            <div class="mb-3">
+                <label for="emailId" class="form-label">email id</label>
+                <input type="email" name="teacher[emailId]" id="emailId" class="form-control" value="<%= teacher.emailId %>" required>
+            </div>
+            <input type="hidden" name="teacher[username]" value="<%= teacher.username %>">
+            <input type="hidden" name="type" value="Teacher">
+            <input type="hidden" name="passkey" value="none">
+            <input type="hidden" name="password" value="none">
+            <div class="submit-button-container"><button class="submit-button">Submit</button></div>
+        </form>
+        </div>
+    </div>
 </body>
