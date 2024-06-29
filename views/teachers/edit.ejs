@@ -1,17 +1,22 @@
 <% layout("/layouts/boilerplate") %>
 <style>
     h2{
-        color: white;
+        color: #0a85a3;
     }
     label{
-        color: white;
+        color: #134f8b;
+    }
+    #profileImage{
+        background-color: #ddd;
     }
 </style>
 <body>
     <h2>Edit your profile</h2>
-    <form method="post" action="/teachers/<%= teacher._id %>?_method=PUT">
+    <form method="post" action="/teachers/<%= teacher._id %>?_method=PUT" enctype="multipart/form-data">
         <label for="name">name</label><br>
         <input type="text" id="name" name="teacher[name]" value="<%= teacher.name %>" required><br><br>
+        <label for="profileImage">upload your new profile image</label><br>
+        <input type="file" id="profileImage" name="teacher[profileImage]" value="<%= teacher.profileImage %>"><br><br>
         <label for="subject">subject</label><br>
         <input type="text" id="subject" name="teacher[subject]" value="<%= teacher.subject %>" required><br><br>
         <label for="description">description</label><br>

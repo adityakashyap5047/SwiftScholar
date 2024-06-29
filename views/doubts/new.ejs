@@ -1,13 +1,17 @@
 <% layout("/layouts/boilerplate") %>
 <style>
     h3{
-        color: white;
+        color: #0a85a3;
     }
     label{
-        color: white;
-    }z
+        color: #134f8b;
+    }
     #image{
-        background-color: white;
+        background-color: #ddd;
+        margin-right: 15px;
+    }
+    #addImageButton{
+        margin-left: -5px;
     }
 </style>
 <body>
@@ -52,7 +56,7 @@
       // Create label element
       const label = document.createElement('label');
       label.setAttribute('for', `image${uploadForm.children.length}`);
-      label.textContent = 'Upload Image ';
+      label.innerHTML = 'Upload Image&nbsp;';
   
       // Create input element
       const input = document.createElement('input');

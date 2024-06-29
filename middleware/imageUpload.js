@@ -1,3 +1,6 @@
+const Teacher = require("../models/teachers.js");
+const Student = require("../models/students.js");
+
 const ExpressError = require("../utils/ExpressError.js");
 const {storage} = require("../cloudConfig.js");
 const multer = require("multer");
@@ -80,3 +83,24 @@ module.exports.handleProfileImage = async (req, res, next) => {
         next(err);
     }
 };
+module.exports.teacherEditedProfileImage = async (req, res, next) => {
+    if(!req.file){
+        let {teacherId} = req.params;
+        let teacher = await Teacher.findById(teacherId);
+        req.body.teacher.profileImage = teacher.profileImage;
+        return next();
+    }
+    req.body.teacher.profileImage = req.file.path;
+    next();
+}
+
+module.exports.studentEditedProfileImage = async (req, res, next) => {
+    if(!req.file){
+        let {studentId} = req.params;
+        let student = await Student.findById(studentId);
+        req.body.student.profileImage = student.profileImage;
+        return next();
+    }
+    req.body.student.profileImage = req.file.path;
+    next();
+}

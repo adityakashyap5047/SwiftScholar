@@ -3,10 +3,20 @@ const router = express.Router();
 const wrapAsync = require("../utils/wrapAsync.js");
 const Teacher = require("../models/teachers.js");
 const {isSignedIn, isTeacher, isOwnerTeacher} = require("../middleware/authenticate.js");
+const { teacherEditedProfileImage } = require("../middleware/imageUpload.js");
 const {validateTeacher} = require("../middleware/validate.js");
 
+const {storage} = require("../cloudConfig.js");
+const multer = require("multer");
+const upload = multer({
+    limits: {
+        fileSize: 3 * 1024 * 1024
+    },
+    storage: storage
+});
+
 //index route
-router.get("/", isSignedIn, wrapAsync(async(req, res) => {
+router.get("/", wrapAsync(async(req, res) => {
     const allTeachers = await Teacher.find({});
     res.render("teachers/index.ejs", {allTeachers});
 }));
@@ -27,10 +37,15 @@ router.get("/:teacherId/edit", isSignedIn, isTeacher, isOwnerTeacher, wrapAsync(
 }));
 
 //update route
-router.put("/:teacherId", isSignedIn, isTeacher, isOwnerTeacher, validateTeacher, wrapAsync(async(req, res) => {
+router.put("/:teacherId", isSignedIn, isTeacher, isOwnerTeacher, upload.single("teacher[profileImage]"), teacherEditedProfileImage, validateTeacher, wrapAsync(async(req, res) => {
     let {teacherId} = req.params;
     try{
-        await Teacher.findByIdAndUpdate(teacherId, {...req.body.teacher});
+        let teacher = await Teacher.findByIdAndUpdate(teacherId, {...req.body.teacher});
+        if(typeof req.file !== "undefined"){
+            let url = req.file.path;
+            teacher.profileImage = url;
+            await teacher.save();
+        }
         req.flash("success", "your profile updated successfully!");
         res.redirect(`/teachers/${teacherId}`);
     } catch(e){
