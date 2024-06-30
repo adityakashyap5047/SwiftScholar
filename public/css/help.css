@@ -11,24 +11,13 @@
   font-family: "Roboto", sans-serif;
 }
 
-.help-section{
-  min-height: 120vh;
-  width: 100%;
-  margin-bottom: 20px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  }
-
-
 .help {
-  width: 85%;
+  width: 100%;
   background: #fff;
   border-radius: 6px;
   padding: 20px 60px 30px 40px;
   box-shadow: 0 5px 10px rgba(0, 0, 0, 0.2);
-  max-width: 85%;
-  margin: auto;
+  margin: auto auto 40px auto;
 }
 
 .help > p,
@@ -58,6 +47,10 @@
   justify-content: space-between;
   align-items: center;
   font-weight: bold;
+}
+
+.faq-heading{
+  text-align: start;
 }
 
 .accordion i {
@@ -94,6 +87,24 @@
   border: none;
 }
 
+@media(max-width: 1000px){
+  .help{
+    margin: 0 0 40px 0;
+  }
+  .accordion{
+    font-size: 1rem;
+  }
+}
+
+@media(max-width: 776px){
+  .help{
+    padding: 20px;
+  }
+  .accordion{
+    font-size: 0.9rem;
+  }
+}
+
 @media (max-width:450px) {
   .accordion {
     background-color: white;
@@ -118,8 +129,5 @@
     font-size: 1rem;
     line-height: 1.4;
     padding-top: 30px;
-  }
-  .help-section{
-    margin-bottom: 8px;
   }
 }

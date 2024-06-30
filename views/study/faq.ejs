@@ -1,117 +1,109 @@
-<div class="help-section">
-  <div id="helpadd" class="help">
+<div id="helpadd" class="help">
     <h1>Frequently Asked Questions</h1>
 
+    
     <div class="faq">
       <button class="accordion">
-        What is SwiftScholar?
+        <span class="faq-heading">About Us</span>
         <i class="fa-solid fa-chevron-down"></i>
       </button>
       <div class="pannel">
-        <p>
-          Hey I am SwiftScholar, I provide proper guidance to students. I check practice Ans from students and evaluate
-          all the mistakes and provide them a proper and better solutions.
-          Tips and tricks for much more betterment and
-          1:1 mentorship for achieving their target. Creates lots of employment for teachers and common people.
-        </p>
+        <p>SwiftScholar is dedicated to guiding students effectively. We meticulously review students' practice answers, offering comprehensive evaluations and improved solutions. Our tips and tricks ensure significant improvement, complemented by personalized 1:1 mentorship to achieve academic goals. By fostering growth, we also contribute to creating employment opportunities for teachers and individuals alike.</p>
       </div>
     </div>
+  
     <div class="faq">
       <button class="accordion">
-        How to Upload Doubt ?
+        <span class="faq-heading">How it works</span>
         <i class="fa-solid fa-chevron-down"></i>
       </button>
       <div class="pannel">
-        <p>
-          After visiting to (Studylite.co.in) click on the Check Ans., then you will simply redirect to our official
-          WhatsApp number then mention your simple detail asked there like: -
-        <ul>
-          <li>• Your name</li>
-          <li>• Class</li>
-          <li>• Subject of which you are submitting practice paper</li>
-        </ul>
-        <br>
-        After writing all this detail send the image or Pdf. of practice paper in that number only and wait at least
-        10 – 20 minutes to get your checked answer paper.
-        </p>
+        <p>Students can upload their practice answers as images to a designated teacher. The teacher then reviews the submissions, identifies mistakes, and provides improved solutions along with helpful tips and tricks.</p>
+      </div>
+    </div>
+  
+    <div class="faq">
+      <button class="accordion">
+        <span class="faq-heading">What services does SwiftScholar offer?</span>
+        <i class="fa-solid fa-chevron-down"></i>
+      </button>
+      <div class="pannel">
+        <p>SwiftScholar offers personalized mentorship, detailed evaluations of student practice answers, and tailored solutions to improve learning. We also provide tips, tricks, and one-on-one guidance to help students achieve their academic goals.</p>
       </div>
     </div>
 
     <div class="faq">
       <button class="accordion">
-        How you can get result?
+        <span class="faq-heading">How can students submit their doubts?</span>
         <i class="fa-solid fa-chevron-down"></i>
       </button>
       <div class="pannel">
-        <p>
-          After submitting wait for 10 to 20 minute and
-          you will get result from same whatsapp number again.
-        </p>
-      </div>
-    </div>
-
-    <!-- <div class="faq">
-      <button class="accordion">
-        On clicking about
-        <i class="fa-solid fa-chevron-down"></i>
-      </button>
-      <div class="pannel">
-        <p>
-          After clicking in about you can read about what is website is, how is it useful.
-
+        <p>To submit doubts, students must first sign up. Once registered, they can easily click on "Add a Doubt" in the navigation bar to upload their questions.
         </p>
       </div>
     </div>
 
     <div class="faq">
       <button class="accordion">
-        Music
+        <span class="faq-heading">How can teachers sign up?</span>
         <i class="fa-solid fa-chevron-down"></i>
       </button>
       <div class="pannel">
-        <p>
-          Here you can listen motivational songs.
-        </p>
+        <p>Teachers can sign up using a unique passkey provided by us, ensuring quality by selecting educators based on their qualifications and experience.</p>
       </div>
     </div>
-
+  
     <div class="faq">
       <button class="accordion">
-        Story
+        <span class="faq-heading">How can teachers benefit from SwiftScholar?</span>
         <i class="fa-solid fa-chevron-down"></i>
       </button>
       <div class="pannel">
-        <p>
-          Here you can watch real life stories of teachers and student.
-        </p>
+        <p>Teachers can enhance their careers by joining SwiftScholar, gaining opportunities for employment and connecting with a community of educators. They play a crucial role in mentoring students and improving educational outcomes.</p>
       </div>
     </div>
-
+  
     <div class="faq">
       <button class="accordion">
-        Book store
+        <span class="faq-heading">What makes SwiftScholar different from other platforms?</span>
         <i class="fa-solid fa-chevron-down"></i>
       </button>
       <div class="pannel">
-        <p>
-          Here you can buy or sell old books.
-        </p>
+        <p>SwiftScholar stands out by providing personalized, in-depth feedback on student work, combining expert evaluations with practical tips. Our focus on individualized mentorship helps students excel, and our commitment to supporting educators fosters a collaborative learning environment.</p>
       </div>
-    </div> -->
-  </div> 
-
+    </div>
+  
+    <div class="faq">
+      <button class="accordion">
+        <span class="faq-heading">How does SwiftScholar ensure quality feedback for students?</span>
+        <i class="fa-solid fa-chevron-down"></i>
+      </button>
+      <div class="pannel">
+        <p>SwiftScholar ensures quality by connecting students with experienced educators who provide thorough evaluations and personalized feedback. This approach helps students understand their mistakes and learn effectively.</p>
+      </div>
+    </div>
+  
+    <div class="faq">
+      <button class="accordion">
+        <span class="faq-heading">What is the process for getting one-on-one mentorship?</span>
+        <i class="fa-solid fa-chevron-down"></i>
+      </button>
+      <div class="pannel">
+        <p>To receive one-on-one mentorship, students simply sign up and upload their practice work. Our dedicated teachers then provide tailored guidance, addressing individual learning needs and goals.</p>
+      </div>
+    </div>  
 </div>
 
 <script>
-  var acc = document.getElementsByClassName("accordion");
-  var i;
+  let acc = document.getElementsByClassName("accordion");
+  let i;
 
   for (i = 0; i < acc.length; i++) {
     acc[i].addEventListener("click", function () {
       this.classList.toggle("active");
       this.parentElement.classList.toggle("active");
 
-      var pannel = this.nextElementSibling;
+      let pannel = this.nextElementSibling;
 
       if (pannel.style.display === "block") {
         pannel.style.display = "none";
