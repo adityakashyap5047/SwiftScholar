@@ -67,6 +67,7 @@
   position: absolute;
   right: 10px;
   cursor: pointer;
+  margin: 4px 30px 0 0;
 }
 
 #togglePassword i {
@@ -83,6 +84,7 @@
   position: absolute;
   right: 10px;
   cursor: pointer;
+  margin: 4px 30px 0 0;
 }
 
 #togglePasskey i {
@@ -95,6 +97,7 @@
   position: absolute;
   right: 10px;
   cursor: pointer;
+  margin: 4px 30px 0 0;
 }
 
 #toggleSecurityCode i {
@@ -171,17 +174,6 @@
                     </div>
                 </div>
     
-                <!-- Admin-Specific Fields -->
-                <div class="field-group hidden mb-3" id="adminFields">
-                        <label for="securityCode" class="form-label">Security Code</label>
-                        <div class="password-container">
-                            <input type="password" name="admin[securityCode]" id="securityCode" class="form-control" placeholder="Enter security code" required>
-                            <button id="toggleSecurityCode" type="button">
-                                <i id="eyeIconSecurityCode" class="fa fa-eye"></i>
-                            </button>
-                        </div>
-                </div>
-    
                 <!-- Teacher and Admin Specific Fields -->
                 <div class="field-group hidden mb-3" id="commonFields">
                         <label for="passkey" class="form-label">Passkey:</label>
@@ -192,6 +184,17 @@
                             </button>
                         </div>
                 </div>
+
+                <!-- Admin-Specific Fields -->
+                <div class="field-group hidden mb-3" id="adminFields">
+                    <label for="securityCode" class="form-label">Security Code</label>
+                    <div class="password-container">
+                        <input type="password" name="admin[securityCode]" id="securityCode" class="form-control" placeholder="Enter security code" required>
+                        <button id="toggleSecurityCode" type="button">
+                            <i id="eyeIconSecurityCode" class="fa fa-eye"></i>
+                        </button>
+                    </div>
+            </div>
     
                 <div class="field-group mb-3">
                     <label for="password" class="form-label">Password:</label>
@@ -204,6 +207,7 @@
                 </div>
                 <div class="submit-button-container"><button type="submit" class="submit-btn">Sign up</button></div>
             </form>
+            <p>Already have an account? <a href="/study/auth/signin" style="text-decoration: none;">Sign in here</a>.</p>
         </div>
     </div>
 

@@ -15,12 +15,6 @@ const upload = multer({
     storage: storage
 });
 
-//index route
-router.get("/", wrapAsync(async(req, res) => {
-    const allTeachers = await Teacher.find({});
-    res.render("teachers/index.ejs", {allTeachers});
-}));
-
 //show route
 router.get("/:teacherId", isSignedIn, isTeacher, isOwnerTeacher, wrapAsync(async(req, res) => {
     let {teacherId} = req.params;

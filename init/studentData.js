@@ -241,4 +241,13 @@ let sampleStudent = [
     }
 ];
 
+const profileImageURL = "https://res.cloudinary.com/dxaolkaje/image/upload/v1719559506/SwiftScholar/olhousa6waupsfrqvdzc.png";
+
+sampleStudent = sampleStudent.map(student => ({
+    ...student,
+    school: "U.H.S Govindpur",
+    profileImage: profileImageURL
+}));
+
+
 module.exports = {data: sampleStudent};

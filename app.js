@@ -6,7 +6,7 @@ const express = require("express");
 const app = express();
 
 const mongoose = require("mongoose");
-const MONGO_URL = "mongodb://127.0.0.1:27017/studyFast";
+const MONGO_URL = "mongodb://127.0.0.1:27017/swiftScholar";
 async function main(){
     await mongoose.connect(MONGO_URL);
 };
@@ -20,7 +20,7 @@ main()
     });
 
 
-const port = 8080;
+const port = process.env.PORT || 8080;
 
 const path = require("path");
 const ejsMate = require("ejs-mate");
@@ -35,6 +35,7 @@ app.use(methodOverride("_method"));
 
 
 const ExpressError = require("./utils/ExpressError.js");
+const wrapAsync = require("./utils/wrapAsync.js");
 
 const students = require("./routes/students.js");
 const teachers = require("./routes/teachers.js");
@@ -101,17 +102,18 @@ passport.deserializeUser(async (obj, done) => {
     }
 });
 
-app.use(async (req, res, next) => {
+app.use(wrapAsync(async (req, res, next) => {
     res.locals.success = req.flash("success");
     res.locals.error = req.flash("error");
     res.locals.currUser = req.user;
+    res.locals.allTeachers = await Teacher.find({});
     if(req.user && req.user.type === "Student"){
         res.locals.studentDoubt = await Student.findById(req.user._id).populate("doubts.doubt").populate("doubts.teacher");
     } else if(req.user && req.user.type === "Teacher"){
         res.locals.teacherDoubtsAssigned = await Teacher.findById(req.user._id).populate("doubtAssigned.student").populate("doubtAssigned.doubt").populate("doubtAssigned.solution");
     }
     next(); 
-});
+}));
 
 
 app.listen(port, () => { 
@@ -137,6 +139,13 @@ app.use("/doubts/:studentId", doubts);
 //review resource:- reviews
 app.use("/reviews/:studentId/:teacherId/:doubtId", reviews);
 
+//admin route
+app.get("/admin/:adminId", async (req, res) => {
+    const {adminId} = req.params;
+    req.flash("error", "on process");
+    return res.redirect("/study")
+});
+
 //admin route student
 app.use("/admin/students", adminStudent);
 
@@ -145,12 +154,6 @@ app.use("/admin/teachers", adminTeacher);
 
 //admin route doubt
 app.use("/admin/doubts", adminDoubt);
-
-//admin route
-app.get("/admin/:adminId", async (req, res) => {
-    const {adminId} = req.params;
-    res.send(`Hello admin, your userId is :- ${adminId}`);
-});
 
 
 /*****************Backend Development********************/

@@ -3,7 +3,7 @@ const initData = require("./teacherData.js");
 const Teacher = require("../models/teachers.js");
 
 async function main(){
-    await mongoose.connect("mongodb://127.0.0.1:27017/studyFast");
+    await mongoose.connect("mongodb://127.0.0.1:27017/swiftScholar");
 };
 
 main()

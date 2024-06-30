@@ -262,4 +262,11 @@ let sampleTeacher = [
     }
 ];
 
+const profileImageURL = "https://res.cloudinary.com/dxaolkaje/image/upload/v1719559506/SwiftScholar/olhousa6waupsfrqvdzc.png";
+
+sampleTeacher = sampleTeacher.map(teacher => ({
+    ...teacher,
+    profileImage: profileImageURL
+}));
+
 module.exports = { data: sampleTeacher};

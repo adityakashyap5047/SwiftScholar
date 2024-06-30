@@ -49,7 +49,7 @@ router.post("/signup", handleProfileImage, wrapAsync(async(req, res, next) => {
         const {teacher, passkey, password} = req.body;
         delete req.body.student;
         delete req.body.admin; 
-        if(!(passkey === `pleaseGiveMeAccess`)){
+        if(!(passkey == process.env.TEACHER_SIGNUP_SECRET)){
             req.flash("error", "you don't have the permission to do this");
             return res.redirect("/study");
         }
@@ -79,7 +79,7 @@ router.post("/signup", handleProfileImage, wrapAsync(async(req, res, next) => {
         const {admin, password} = req.body;
         delete req.body.student;
         delete req.body.teacher;
-        if(!(admin.passkey === "abcd" && admin.securityCode === "1234")){
+        if(!(admin.passkey == process.env.ADMIN_PASSKEY && admin.securityCode == process.env.ADMIN_SECURITY_CODE)){
             req.flash("error", "you don't have the permission to do this");
             return res.redirect("/study");
         }
@@ -159,7 +159,7 @@ router.post("/signin", saveRedirectUrl, (req, res, next) => {
         })(req, res, next);
     } else if (role === "admin") {
         const {passkey, securityCode} = req.body;
-        if(!(passkey === "abcd" && securityCode === "1234")){
+        if(!(passkey == process.env.ADMIN_PASSKEY && securityCode == process.env.ADMIN_SECURITY_CODE)){
             req.flash("error", "Passkey or securityCode is incorrect");
             return res.redirect("/study/auth/signin");
         }
