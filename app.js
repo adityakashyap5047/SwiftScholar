@@ -49,14 +49,29 @@ const adminDoubt = require("./routes/admin/doubts.js");
 const session = require("express-session");
 const flash = require("connect-flash");
 
+const MongoStore = require("connect-mongo");
+
 const passport = require("passport");
 const LocalStrategy = require("passport-local");
 const Student = require("./models/students.js");
 const Teacher = require("./models/teachers.js");
 const Admin = require("./models/admin.js");
 
+const store = MongoStore.create({
+    mongoUrl: dbUrl,
+    crypto: {
+        secret: process.env.SECRET
+    }, 
+    touchAfter: 24 * 60 * 60
+}); 
+
+store.on("error", function(e){  
+    console.log("Session store error", e);
+});
+
 const sessionOption = {
-    secret: "fafgafgaahghafadgs4rtwy454674ywtr",
+    store,
+    secret: process.env.SECRET,
     resave: false,
     saveUninitialized: true,
     cookie: {
@@ -64,7 +79,7 @@ const sessionOption = {
         maxAge: 7 * 24 * 60 * 60 * 1000,
         httpOnly: true,
     }
-} 
+}       
 
 app.use(session(sessionOption));
 app.use(flash());
