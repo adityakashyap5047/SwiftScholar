@@ -2,11 +2,11 @@
   "engines": {
     "node": "20.9.0"
   },
-  "name": "backend",
+  "name": "swiftscholar",
   "version": "1.0.0",
-  "main": "index.js",
+  "main": "app.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "start": "node app.js"
   },
   "keywords": [],
   "author": "Aditya Kumar",
