@@ -1,24 +1,93 @@
 <% layout("/layouts/boilerplate") %>
 <style>
     h1{
-        color: white;
+        color: #0f87a4;
+        margin-top: 10px;
     }
-    p{
-        color: white;
+    /* profile styling */
+    .profile-body-container{
+        display: flex;
+        justify-content: center;
+        flex-wrap: wrap;
+    }
+    .profile-body{
+        margin: 10px;
+    }
+    .profile-container {
+        background-color: white;
+        border-radius: 10px;
+        box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        padding: 20px;
+        width: 300px;
+        text-align: center;
+        margin: 25px 0;
+    }
+    .profile-picture {
+        border-radius: 50%;
+        width: 100px;
+        height: 100px;
+        object-fit: cover;
+        margin-bottom: 20px;
+    }
+    .name {
+        font-size: 24px;
+        font-weight: bold;
+        margin-bottom: 10px;
+    }
+    .username {
+        font-size: 18px;
+        color: gray;
+        margin-bottom: 20px;
+    }
+    .class, .school, .contact-info {
+        font-size: 16px;
+        margin-bottom: 10px;
+    }
+    .contact-info {
+        margin-top: 20px;
+    }
+    .profile-buttons {
+        margin: 20px 0;
+        display: flex;
+        justify-content: space-around;
+    }
+    .profile-button {
+        padding: 10px 20px;
+        border: none;
+        border-radius: 5px;
+        cursor: pointer;
+        font-size: 14px;
+        background-color: #0a85a3;
+    }
+    .profile-button:hover {
+        background-color: #3b90e5;
     }
 </style>
 <link rel="stylesheet" href="/css/admin/students/index.css">
 <body>
     <h1>All Students</h1>
-    <% for(student of allStudents) {%>
-        <form action="/admin/students/<%= student._id %>">
-            <div>
-                <p>name: <%= student.name %></p>
-                <p>username: <%= student.username %></p>
-                <p>class: <%= student.class %></p>
-                <button>view profile</button>
-                <hr>
-            </div>
-        </form>
-    <% } %>
+    <div class="profile-body-container">
+    <% for(student of allStudents) {%>    
+        <div class="profile-body">
+            <div class="profile-container">
+                <img src="<%= student.profileImage %>" alt="Profile Picture" class="profile-picture">
+                <div class="name"><%= student.name %></div>
+                <div class="username">@<%= student.username %></div>
+                <div class="class">Class: <%= student.class %></div>
+                <div class="school">School: <%= student.school %></div>
+                <div class="contact-info">
+                    <div>Phone: <%= student.contactNo %></div>
+                    <div>Email: <%= student.emailId %></div>
+                </div>
+               <div class="profile-buttons">
+                   <% if(currUser) {%>
+                       <form action="/admin/students/<%= student._id %>">
+                           <button class="profile-button">View profile</button>
+                       </form>
+                   <% } %>
+               </div>
+           </div>
+           </div>
+           <% } %>
+        </div>
 </body>

@@ -2,68 +2,148 @@
 <style>
     h3{
         color: white;
+    }/* profile styling */
+    .profile-body{
+        display: flex;
+        justify-content: center;
     }
-    li{
-        color: white;
+    .profile-container {
+        background-color: white;
+        border-radius: 10px;
+        box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        padding: 20px;
+        width: 300px;
+        text-align: center;
+        margin: 25px 0;
+    }
+    .profile-picture {
+        border-radius: 50%;
+        width: 100px;
+        height: 100px;
+        object-fit: cover;
+        margin-bottom: 20px;
+    }
+    .name {
+        font-size: 24px;
+        font-weight: bold;
+        margin-bottom: 10px;
+    }
+    .username {
+        font-size: 18px;
+        color: gray;
+        margin-bottom: 20px;
+    }
+    .class, .school, .contact-info {
+        font-size: 16px;
+        margin-bottom: 10px;
+    }
+    .contact-info {
+        margin-top: 20px;
+    }
+    .profile-buttons {
+        margin: 20px 0;
+        display: flex;
+        justify-content: space-around;
+    }
+    .profile-button {
+        padding: 10px 20px;
+        border: none;
+        border-radius: 5px;
+        cursor: pointer;
+        font-size: 14px;
+        background-color: #bc1515;
+    }
+    .profile-button:hover {
+        background-color: #bc7915;
+    }
+    .view-button {
+        background-color: #0a85a3;
+    }
+    .view-button:hover {
+        background-color: #3b90e5;
     }
     h4{
         color: white;
     }
-    p{
-        color: white;
-    }
-    a{
-        color: white;
+    .doubt-container{
+        display: flex;
+        justify-content: center;
+        flex-wrap: wrap;
+        align-items: end;
+
     }
 </style>
 <body>
     <h3>Student Details :</h3>
-    <ul>
-        <li>name: <%= student.name %></li>
-        <li>username: <%= student.username %></li>
-        <li>class: <%= student.class %></li>
-        <li>contact number: <%= student.contactNo %></li>
-        <li>email id: <%= student.emailId %></li>
-    </ul>
+    <div class="profile-body">
+        <div class="profile-container">
+            <img src="<%= student.profileImage %>" alt="Profile Picture" class="profile-picture">
+            <div class="name"><%= student.name %></div>
+            <div class="username">@<%= student.username %></div>
+            <div class="class">Class: <%= student.class %></div>
+            <div class="school">School: <%= student.school %></div>
+            <div class="contact-info">
+                <div>Phone: <%= student.contactNo %></div>
+                <div>Email: <%= student.emailId %></div>
+            </div>
+           <div class="profile-buttons">
+               <% if(currUser ) {%>
+                   <form method="post" action="/admin/students/<%= student._id %>/delete?_method=DELETE">
+                       <button class="profile-button">Delete Profile</button>
+                   </form>
+               <% } %>
+           </div>
+       </div>
+       </div>
     <% if(studentDoubts.doubts.length) {%>
         <hr>
-        <h4>Your doubts</h4>
+        <h4>Doubts posted by <i><%= student.name %></i></h4>
         <hr>
     <% } %>
-    <% for(dbt of studentDoubts.doubts) {%>
-        <% if(dbt) {%>
-            <p>*********Teachers Details************</p>
-            <% if(dbt.teacher) {%>
-                <p>name: <a href="/admin/teachers/<%= dbt.teacher._id %>"><%= dbt.teacher.name %></a></p>
-                <p>username: <%= dbt.teacher.username %></p>
-                <p>subject: <%= dbt.teacher.subject %></p>
-                <p>contactNo: <%= dbt.teacher.contactNo %></p>
-                <p>emailId: <%= dbt.teacher.emailId %></p>
+    <div class="doubt-container">
+        <% for(dbt of studentDoubts.doubts) {%>
+            <% if(dbt) {%>
+                <% if(dbt.teacher) {%>
+                    <div class="profile-body">
+                        <div class="profile-container">
+                            <img src="<%= dbt.teacher.profileImage %>" alt="Profile Picture" class="profile-picture">
+                            <div class="name"><%= dbt.teacher.name %></div>
+                            <div class="username">@<%= dbt.teacher.username %> (<%= dbt.teacher.subject %>)</div>
+                            <div><%= dbt.teacher.description %></div>
+                            <div class="contact-info">
+                                <div>Phone: <%= dbt.teacher.contactNo %></div>
+                                <div>Email: <%= dbt.teacher.emailId %></div>
+                            </div>
+                           <div class="profile-buttons">
+                               <% if(currUser ) {%>
+                                   <form method="get" action="/admin/teachers/<%= dbt.teacher._id %>">
+                                       <button class="profile-button view-button">View Profile</button>
+                                   </form>
+                               <% } %>
+                           </div>
+                       </div>
+                       </div>
+                <% } %>
+                <% if(!dbt.teacher) {%>
+                    <p><i>Teacher doesn't exist</i></p>
+                <% } %>
+                <p>*********Doubts Details************</p>
+                <p>image: <a href="/admin/doubts/<%= dbt.doubt._id %>"><%= dbt.doubt.image1 %></a></p>
+                <p>class: <%= dbt.doubt.class %></p>
+                <p>subject: <%= dbt.doubt.subject %></p>
+                <p>topic: <%= dbt.doubt.topic %></p>
             <% } %>
-            <% if(!dbt.teacher) {%>
-                <p><i>Teacher doesn't exist</i></p>
+            <% if(dbt.solution.length) {%>
+                <h4>Your solution</h4>
+                <p>image: <%= dbt.solution[0].image1 %></p>
+                <p>suggestion: <%= dbt.solution[0].suggestion %></p>
             <% } %>
-            <p>*********Doubts Details************</p>
-            <p>image: <a href="/admin/doubts/<%= dbt.doubt._id %>"><%= dbt.doubt.image1 %></a></p>
-            <p>class: <%= dbt.doubt.class %></p>
-            <p>subject: <%= dbt.doubt.subject %></p>
-            <p>topic: <%= dbt.doubt.topic %></p>
+            <% if(dbt.review.length) {%>
+                <h4>You gave review</h4>
+                <p>rating: <%= dbt.review[0].rating %></p>
+                <p>comment: <%= dbt.review[0].comments %></p>
+            <% } %>
+            <hr>
         <% } %>
-        <% if(dbt.solution.length) {%>
-            <h4>Your solution</h4>
-            <p>image: <%= dbt.solution[0].image1 %></p>
-            <p>suggestion: <%= dbt.solution[0].suggestion %></p>
-        <% } %>
-        <% if(dbt.review.length) {%>
-            <h4>You gave review</h4>
-            <p>rating: <%= dbt.review[0].rating %></p>
-            <p>comment: <%= dbt.review[0].comments %></p>
-        <% } %>
-        <hr>
-    <% } %>
-    <br>
-    <form method="post" action="/admin/students/<%= student._id %>/delete?_method=DELETE">
-        <button>Delete this profile</button>
-    </form>
-    <br>
+    </div>
 </body>

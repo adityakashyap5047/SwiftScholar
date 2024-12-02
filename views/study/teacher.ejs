@@ -35,10 +35,10 @@
     }
 </style>
 <div class="teacher-details" id="teachers">
-    <h3 class="our-teachers">Our Teachers</h3>
     <div id="carouselExampleCaptions" class="carousel slide">
         <div class="carousel-inner">
             <% for(let i = 0; i < allTeachers.length; i++) {%>
+                <h3 class="our-teachers">Our Teachers</h3>
                 <% if(i === 0) {%>
                     <div class="carousel-item active">
                         <img src="<%= allTeachers[i].profileImage %>"

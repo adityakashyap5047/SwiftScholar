@@ -6,7 +6,7 @@ const express = require("express");
 const app = express();
 
 const mongoose = require("mongoose");
-const dbUrl = process.env.ATLASDB_URL;
+const dbUrl = "mongodb://127.0.0.1:27017/swiftScholar";
 async function main(){
     await mongoose.connect(dbUrl);
 };
@@ -154,12 +154,6 @@ app.use("/doubts/:studentId", doubts);
 //review resource:- reviews
 app.use("/reviews/:studentId/:teacherId/:doubtId", reviews);
 
-//admin route
-app.get("/admin/:adminId", async (req, res) => {
-    const {adminId} = req.params;
-    req.flash("error", "on process");
-    return res.redirect("/study")
-});
 
 //admin route student
 app.use("/admin/students", adminStudent);
@@ -169,6 +163,13 @@ app.use("/admin/teachers", adminTeacher);
 
 //admin route doubt
 app.use("/admin/doubts", adminDoubt);
+
+//admin route
+app.get("/admin/:adminId", async (req, res) => {
+    const {adminId} = req.params;
+    req.flash("success", "on process");
+    return res.send("/study")
+});
 
 
 /*****************Backend Development********************/
